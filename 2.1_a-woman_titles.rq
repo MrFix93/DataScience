@@ -1,0 +1,5 @@
+PREFIX a: <http://www.daml.org/2001/01/gedcom/gedcom#>
+
+SELECT DISTINCT  ?title
+WHERE {?x a:sex "F".
+		?x a:title ?title }

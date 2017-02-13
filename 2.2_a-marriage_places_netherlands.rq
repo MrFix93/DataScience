@@ -1,0 +1,6 @@
+PREFIX a: <http://www.daml.org/2001/01/gedcom/gedcom#>
+
+SELECT DISTINCT ?place ?date
+WHERE {?x a:marriage ?marriage .
+		?marriage a:place ?place.
+		FILTER regex(?place, "Netherlands","i")}
