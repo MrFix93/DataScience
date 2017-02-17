@@ -1,0 +1,9 @@
+PREFIX:owl <http://www.w3.org/2002/07/owl#>
+
+SELECT ?local ?remote ?remote_property ?remote_value
+WHERE {
+    <royal92.owl#id> owl:sameAs ?remote .
+    SERVICE <http://dbpedia.org/sparql> {
+        ?remote ?remote_property ?remote_value
+    }
+}

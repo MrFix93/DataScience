@@ -1,0 +1,20 @@
+PREFIX a:  <http://www.daml.org/2001/01/gedcom/gedcom#>
+
+SELECT DISTINCT ?membername
+WHERE {
+  {
+    ?bea a:name ?beaname .
+    ?bea a:spouseIn ?family .
+    ?member a:childIn ?family .
+    ?member a:name ?membername
+    FILTER regex(?beaname, "Beatrix of_Netherlands", "i")
+  }
+  UNION
+  {
+    ?bea a:name ?beaname .
+    ?bea a:spouseIn ?family .
+    ?member a:spouseIn ?family .
+    ?member a:name ?membername
+    FILTER regex(?beaname, "Beatrix of_Netherlands", "i")
+  }
+}

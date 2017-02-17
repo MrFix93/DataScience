@@ -1,0 +1,10 @@
+PREFIX a:  <http://www.daml.org/2001/01/gedcom/gedcom#>
+
+SELECT DISTINCT ?clausname
+WHERE {
+?bea a:spouseIn ?family .
+?bea a:name ?beaname .
+?claus a:spouseIn ?family .
+?claus a:name ?clausname
+FILTER regex(?beaname, "Beatrix of_Netherlands", "i")
+}
