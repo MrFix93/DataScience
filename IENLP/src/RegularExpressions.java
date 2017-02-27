@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 public class RegularExpressions {
     final static int LIMIT = 20;
     public static void main (String[] args) {
-        List<String> tweets = readFile("C:\\Users\\Joep\\Documents\\GitHub\\DataScience\\IENLP\\data\\Wimbledon2014 Tweets.txt"); //load dataset
+        List<String> tweets = readFile("C:\\Users\\Joep\\Google Drive\\HMI\\Datasets\\Wimbledon2014 Tweets.txt"); //load dataset
         List<Data> tweetData = new ArrayList<Data>();
         for(String s : tweets){
             tweetData.add(regex(s)); //for all tweets split into mentions and hastags
