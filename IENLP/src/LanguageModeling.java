@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 
 public class LanguageModeling {
-    final static int SIZE = 4;
+    final static int SIZE = 1;
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
@@ -36,20 +36,20 @@ public class LanguageModeling {
         HashMap<String,Double> wordCount = new HashMap<String,Double>();
         System.out.println("amount of words: " + words.size());
         int amountOfWords = words.size();
-        for(int i = SIZE;i < words.size(); i++){
+        for(int i = SIZE;i < words.size(); i++){ //iterates over all seperate words
             String key = "";
-            for(int w = 0; w < SIZE; w++){
+            for(int w = 0; w < SIZE; w++){ //generate the n-gram classification as key; if 1-gram key is one word, etc
                 key += words.get(i - SIZE + w) + " ";
             }
             if(wordCount.containsKey(key)) //if key is already present in list dont calculate again
                 continue;
 
             int count = 0;
-            for(int q = SIZE;q < words.size(); q++){
+            for(int q = SIZE;q < words.size(); q++){ //loop trough all words and check if the n-gram classification is present
                 if(q == i) //don't get self
                     continue;
                 boolean match = true;
-                for(int w = 0; w < SIZE; w++){
+                for(int w = 0; w < SIZE; w++){// for the size of n-gram check if a serie of words is equal to the n-gram classification serie
                     if(!words.get(i - SIZE + w).equals(words.get(q - SIZE + w))){
                         match = false;
                         break;
