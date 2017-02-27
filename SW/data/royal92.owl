@@ -5,7 +5,7 @@
 	 <!ENTITY owl 'http://www.w3.org/2002/07/owl#'>
 ]>
 <rdf:RDF xmlns:a="&a;"
-	 xmlns:rdf="&rdf;" xml:base="http://www.daml.org/2001/01/gedcom/royal92">
+	 xmlns:rdf="&rdf;" xml:base="http://www.daml.org/2001/01/gedcom/royal92" xmlns:owl="&owl;">
 <a:Family rdf:about="#@F1000@"/>
 <a:Family rdf:about="#@F1001@"/>
 <a:Family rdf:about="#@F1002@"/>
@@ -38,7 +38,7 @@
 <a:Family rdf:about="#@F1023@"/>
 <a:Family rdf:about="#@F1024@"/>
 <a:Family rdf:about="#@F1025@">
-	<a:marriage rdf:resource="#event1367"/>
+	<a:marriage rdf:resource="#ev   ent1367"/>
 </a:Family>
 <a:Family rdf:about="#@F1026@"/>
 <a:Family rdf:about="#@F1027@"/>
@@ -21330,7 +21330,7 @@
 	 a:name="Beatrix of_Netherlands //"
 	 a:sex="F"
 	 a:title="Queen">
-	<owl:sameAs rdf:resource="http://live.dbpedia.org/resource/Beatrix_of_the_Netherlands">
+	<owl:sameAs rdf:resource="http://dbpedia.org/resource/Beatrix_of_the_Netherlands"/>
 	<a:childIn rdf:resource="#@F243@"/>
 	<a:spouseIn rdf:resource="#@F443@"/>
 	<a:birth rdf:resource="#event3803"/>
