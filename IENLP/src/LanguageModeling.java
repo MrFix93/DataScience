@@ -1,97 +1,110 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Scanner;
 
 
 public class LanguageModeling {
-    final static int SIZE = 1;
+    final static int SIZE = 2;
+    final static String END_DELIMITER = "TITLEEND";
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        List<String> words = readFile("C:\\Users\\Joep\\Documents\\GitHub\\DataScience\\IENLP\\data\\DBLPTrainset(1).txt",1000);
-        HashMap<String,Double> wordsProbability =  wordProbability(words);
-        HashMap<String,Double> wordsProbabilitySorted = sortByComparator(wordsProbability,false);
+        String words = readFile(args[0],1000);
 
-        double singleOccurance =  1d / Double.valueOf(words.size());
-        for(Entry<String, Double> word :wordsProbabilitySorted.entrySet()){
-            if(word.getValue() > singleOccurance)
-                System.out.println(word.getKey() + " " + word.getValue());
-            else
-                break;
+        HashMap<Integer, List<String>> ngrams = createNGrams(words);
+        HashMap<Integer, HashMap<String, Integer>> total_count_ngrams = new HashMap<>();
+
+        for(Entry<Integer, List<String>> entry: ngrams.entrySet()) {
+            int current_n = entry.getKey();
+            HashMap<String, Integer> countNgrams = countNGram(entry.getValue());
+            total_count_ngrams.put(current_n, countNgrams);
+
+            for(Entry<String, Integer> ngram: countNgrams.entrySet()) {
+                //Double probability = getProbabilityOfNGram(ngram.getValue(), total_count_ngrams.get(current_n - 1));
+            }
+
         }
         System.out.println("finished!");
 
     }
-    public static HashMap<String,Double> wordProbability(List<String> words){
-        HashMap<String,Double> wordCount = new HashMap<String,Double>();
-        System.out.println("amount of words: " + words.size());
-        int amountOfWords = words.size();
-        for(int i = SIZE;i < words.size(); i++){ //iterates over all seperate words
-            String key = "";
-            for(int w = 0; w < SIZE; w++){ //generate the n-gram classification as key; if 1-gram key is one word, etc
-                key += words.get(i - SIZE + w) + " ";
-            }
-            if(wordCount.containsKey(key)) //if key is already present in list dont calculate again
-                continue;
 
-            int count = 0;
-            for(int q = SIZE;q < words.size(); q++){ //loop trough all words and check if the n-gram classification is present
-                if(q == i) //don't get self
-                    continue;
-                boolean match = true;
-                for(int w = 0; w < SIZE; w++){// for the size of n-gram check if a serie of words is equal to the n-gram classification serie
-                    if(!words.get(i - SIZE + w).equals(words.get(q - SIZE + w))){
-                        match = false;
-                        break;
+    public static HashMap<Integer, List<String>> createNGrams(String input){
+
+        String[] words = input.split("\\s");
+        System.out.println("amount of words: " + words.length);
+
+        int amountOfWords = words.length;
+        HashMap<Integer,List<String>> ngrams = new HashMap<>();
+
+        for(int s = 0; s < SIZE; s++) {
+            ngrams.put(s, new ArrayList<>());
+
+            ngram_key_loop:
+            for(int i = s;i < words.length; i++) { //iterates over all seperate words
+                String key = "";
+
+                for(int w = 0; w < SIZE; w++) { //generate the n-gram classification as key; if 1-gram key is one word, etc
+                    String next = words[i - SIZE + w];
+                    if(next.equals(LanguageModeling.END_DELIMITER)) {
+                        continue ngram_key_loop;
                     }
+                    key += next + " ";
                 }
-                if(match){ //if the combination is equal
-                    count++;
-                }
+
+                ngrams.get(s).add(key);
             }
-            double prob = Double.valueOf(count + 1) / Double.valueOf(amountOfWords);
-            wordCount.put(key, prob);
         }
-        return wordCount;
+        return ngrams;
     }
-    public static List<String> readFile(String fileName,int amountOfRows){
-        File file = new File(fileName);
-        List<String> words = new ArrayList<String>();
-        String text = "";
+
+    public static HashMap<String, Integer> countNGram(List<String> ngrams) {
+        HashMap<String, Integer> result = new HashMap<>();
+        for(String ngram: ngrams) {
+            if(result.containsKey(ngram)) {
+                continue;
+            }
+            int count = Collections.frequency(ngrams, ngram);
+            result.put(ngram,count);
+        }
+
+        return result;
+    }
+
+    public static Double getProbabilityOfNGram(int current_ngram_count, int previous_ngram_count) {
+        return Double.valueOf(current_ngram_count/previous_ngram_count);
+    }
+    /**
+     * Reads file, return list of titles associated with a classification (www, SIGDATA etc)
+     * @param fileName
+     * @param amountOfRows
+     * @return
+     */
+    public static String readFile(String fileName, int amountOfRows){
+        String result = "";
+
         Scanner scanner;
         try {
-            scanner = new Scanner(file);
+            scanner = new Scanner(new File(fileName));
 
             int i = amountOfRows;//1700
             while(scanner.hasNextLine()) {
-                if(i-- < 0)
+                if(i-- < 0) {
                     break;
-                text += scanner.nextLine().toLowerCase();
-            }
-            words = new ArrayList<String>(Arrays.asList(text.split("\\W")));
-            Iterator<String> it = words.iterator();
-            while (it.hasNext()) {
-                String name = it.next();
-                if(name.equals("")){
-                    it.remove();
                 }
+                String[] text = scanner.nextLine().split("\\t");
+                String title = text[2].toLowerCase();
+                title = title.replaceAll("[/d/.]", "");
+                result += title + " " + LanguageModeling.END_DELIMITER + " ";
             }
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return words;
+
+        return result;
     }
+
     private static HashMap<String, Double> sortByComparator(HashMap<String, Double> unsortMap, final boolean order)
     {
 
