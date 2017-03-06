@@ -12,9 +12,10 @@ import static jdk.nashorn.internal.objects.NativeString.trim;
 public class NGram {
     private List<String> ngrams = new ArrayList<>();
     private HashMap<String, Double> ngramsP = new HashMap<>();
+    private String total_text;
 
-    public NGram() {
-
+    public NGram(String total_text) {
+        this.total_text = total_text;
     }
 
     /**
@@ -23,7 +24,7 @@ public class NGram {
      * @param total_text
      * @return
      */
-    public double p(String ngram, String total_text, int count) {
+    public double p(String ngram, int count) {
         int n = ngram.split("\\s").length;
 
         int current = Util.countSubstring(this.get(n), total_text);
@@ -43,12 +44,12 @@ public class NGram {
      * @param total_text
      * @return
      */
-    public HashMap<String, Double> getAllP(String total_text, int[] counts) {
+    public HashMap<String, Double> getAllP(int[] counts) {
         for(String ngram: ngrams) {
             int length = ngram.split("\\s").length;
             if(length > 1) {
                 int count = counts[length - 1];
-                this.ngramsP.put(ngram, this.p(ngram, total_text, count));
+                this.ngramsP.put(ngram, this.p(ngram, count));
             }
         }
 

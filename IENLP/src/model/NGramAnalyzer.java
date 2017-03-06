@@ -15,14 +15,13 @@ public class NGramAnalyzer {
     final static int MAX_RESULTS = 50;
     final static String END_DELIMITER = "TITLEEND";
     final static String START_DELIMITER = "TITLESTART";
+    static String all_words = "";
 
     public static void main(String[] args) {
 
         System.out.println("START readFile");
-        String all_words = readFile(args[0]);
+        all_words = readFile(args[0]);
         System.out.println("FINISHED readFile; with " + all_words.length() + " characters");
-
-
 
         System.out.println("START createNGrams");
         List<NGram> ALlNGrams = createNGrams(all_words);
@@ -36,10 +35,9 @@ public class NGramAnalyzer {
         HashMap<String, Double> NGramsProbability = new HashMap<>();
         for(NGram ngram: ALlNGrams) {
             // Calculate the P(n|n-1) for every NGrams and add to the list
-            NGramsProbability.putAll(ngram.getAllP(all_words, counts));
+            NGramsProbability.putAll(ngram.getAllP(counts));
         }
         System.out.println("FINISHED NGramsProbability; with " + NGramsProbability.size() + " NGrams and probabilities");
-
 
         sentenceProbability(NGramsProbability,"A study of identifibility for blind source separation via nonorthogonal joint diagonalization");
         sentenceProbability(NGramsProbability,"A study of identifibility for blind source separation via nonorthogonal joint applications");
@@ -49,12 +47,9 @@ public class NGramAnalyzer {
         HashMap<String, Double> sorted = sortByComparator(NGramsProbability,false);
         System.out.println("FINISHED sortByComparator;");
 
-        /*
         System.out.println("START createResultList");
         HashMap<Integer, List<String>> results = createResultList(sorted);
         System.out.println("FINISH createResultList");
-
-
 
         for(int i = 2; i <= MAX_SIZE; i++) {
             System.out.println("TOP " + MAX_RESULTS + " of " + i + "-gram");
@@ -65,30 +60,32 @@ public class NGramAnalyzer {
         }
 
         System.out.println("finished!");
-        **/
     }
+
     public static void sentenceProbability(HashMap<String, Double> NGramsProbability, String sentence){
-        Double min = Collections.min(NGramsProbability.values());
-        sentence = START_DELIMITER + " " + sentence.toLowerCase()+ " " + END_DELIMITER;
+        sentence = START_DELIMITER + " " + cleanTitle(sentence) + " " + END_DELIMITER;
         String[] sentenceWords = sentence.split("\\s");
-        Double prob = 1d;
-        wordProb : for (int wordIndex = 0; wordIndex < sentenceWords.length; wordIndex++){
+
+        double prob = 0d;
+        wordProb :
+        for (int wordIndex = 0; wordIndex < sentenceWords.length; wordIndex++){
             String key = sentenceWords[wordIndex];
             for (int n = 1; n < MAX_SIZE; n++ ){
-                if(wordIndex - n < 0)
+                if(wordIndex - n < 0) {
                     continue wordProb;
+                }
+
                 key = sentenceWords[wordIndex - n] + " " + key;
 
-
-               //System.out.println("the word is: " + key);
+                //System.out.println("the word is: " + key);
                 if(NGramsProbability.containsKey(key)){
                     double wordProb = NGramsProbability.get(key);
                     //System.out.println("the prob of " + key + " is " + wordProb);
-                    prob *= Math.log10(wordProb);
+                    prob += Math.log10(wordProb);
                 }
             }
         }
-        System.out.println("The probability for the sentence " + sentence + " is " + prob);
+        //System.out.println("The probability for the sentence " + sentence + " is " + prob);
 
     }
     public static HashMap<Integer, List<String>> createResultList(HashMap<String, Double> sorted){
@@ -148,7 +145,7 @@ public class NGramAnalyzer {
                 continue ngram_key_loop;
             }
 
-            NGram newGram = new NGram();
+            NGram newGram = new NGram(all_words);
             for(int w = 0; w < MAX_SIZE; w++) { //generate the n-gram classification as key; if 1-gram key is one word, etc
                 String next = words[i + w];
                 if(next.equals(NGramAnalyzer.END_DELIMITER)) {
