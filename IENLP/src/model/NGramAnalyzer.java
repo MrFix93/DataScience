@@ -10,60 +10,51 @@ import static jdk.nashorn.internal.objects.NativeString.trim;
 
 public class NGramAnalyzer {
     final static int MAX_SIZE = 4;
+    final static int AMOUNT_RECORDS =  2000;
     final static int RESULT_SIZE = 4;
     final static int MAX_RESULTS = 50;
     final static String END_DELIMITER = "TITLEEND";
     final static String START_DELIMITER = "TITLESTART";
 
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
+
+        System.out.println("START readFile");
         String all_words = readFile(args[0]);
+        System.out.println("FINISHED readFile; with " + all_words.length() + " characters");
 
-        HashMap<String, Double> NGramsProbability = new HashMap<>();
+
+
+        System.out.println("START createNGrams");
         List<NGram> ALlNGrams = createNGrams(all_words);
+        System.out.println("FINISHED createNGrams; with " + ALlNGrams.size() + " NGram.class objects");
 
-        int[] counts = new int[MAX_SIZE];
+        System.out.println("START nGramCount");
+        int[] counts = nGramCount(ALlNGrams);
+        System.out.println("FINISHED nGramCount;");
 
-        for(NGram ngram: ALlNGrams) {
-            for(int i = 0; i < ngram.getLength(); i++) {
-                counts[i]++;
-            }
-        }
-
+        System.out.println("START NGramsProbability");
+        HashMap<String, Double> NGramsProbability = new HashMap<>();
         for(NGram ngram: ALlNGrams) {
             // Calculate the P(n|n-1) for every NGrams and add to the list
             NGramsProbability.putAll(ngram.getAllP(all_words, counts));
         }
+        System.out.println("FINISHED NGramsProbability; with " + NGramsProbability.size() + " NGrams and probabilities");
 
+
+        sentenceProbability(NGramsProbability,"A study of identifibility for blind source separation via nonorthogonal joint diagonalization");
+        sentenceProbability(NGramsProbability,"A study of identifibility for blind source separation via nonorthogonal joint applications");
+
+
+        System.out.println("START sortByComparator");
         HashMap<String, Double> sorted = sortByComparator(NGramsProbability,false);
+        System.out.println("FINISHED sortByComparator;");
 
-        int count = 0;
-        String[] result = new String[MAX_SIZE];
-        HashMap<Integer, List<String>> results = new HashMap<>();
+        /*
+        System.out.println("START createResultList");
+        HashMap<Integer, List<String>> results = createResultList(sorted);
+        System.out.println("FINISH createResultList");
 
-        for(int i = 2; i <= MAX_SIZE; i++) {
-            results.put(i, new ArrayList<>());
-        }
 
-        for(Map.Entry<String, Double> entry: sorted.entrySet()) {
-            int n = entry.getKey().split("\\s").length;
-
-            int current_length = results.get(n).size();
-            if(current_length <= MAX_RESULTS) {
-                results.get(n).add("(" + current_length + ") " + entry.getKey() + ": " + entry.getValue());
-            }
-
-            int full = 0;
-            for(int i = 2; i <= MAX_SIZE; i++) {
-                if(results.get(i).size() == MAX_RESULTS) {
-                    full++;
-                }
-            }
-            if(full == MAX_SIZE-2){
-                break;
-            }
-
-        }
 
         for(int i = 2; i <= MAX_SIZE; i++) {
             System.out.println("TOP " + MAX_RESULTS + " of " + i + "-gram");
@@ -74,6 +65,73 @@ public class NGramAnalyzer {
         }
 
         System.out.println("finished!");
+        **/
+    }
+    public static void sentenceProbability(HashMap<String, Double> NGramsProbability, String sentence){
+        Double min = Collections.min(NGramsProbability.values());
+        sentence = START_DELIMITER + " " + sentence.toLowerCase()+ " " + END_DELIMITER;
+        String[] sentenceWords = sentence.split("\\s");
+        Double prob = 1d;
+        wordProb : for (int wordIndex = 0; wordIndex < sentenceWords.length; wordIndex++){
+            String key = sentenceWords[wordIndex];
+            for (int n = 1; n < MAX_SIZE; n++ ){
+                if(wordIndex - n < 0)
+                    continue wordProb;
+                key = sentenceWords[wordIndex - n] + " " + key;
+
+
+               //System.out.println("the word is: " + key);
+                if(NGramsProbability.containsKey(key)){
+                    double wordProb = NGramsProbability.get(key);
+                    //System.out.println("the prob of " + key + " is " + wordProb);
+                    prob *= Math.log10(wordProb);
+                }
+            }
+        }
+        System.out.println("The probability for the sentence " + sentence + " is " + prob);
+
+    }
+    public static HashMap<Integer, List<String>> createResultList(HashMap<String, Double> sorted){
+        HashMap<Integer, List<String>> results = new HashMap<>();
+
+        for(int i = 2; i <= MAX_SIZE; i++) {//create object for every n-gram
+            results.put(i, new ArrayList<>());
+        }
+
+        for(Map.Entry<String, Double> entry: sorted.entrySet()) {
+            int n = entry.getKey().split("\\s").length;//get the N of the current n-gram
+
+            int current_length = results.get(n).size(); //get the size of the current n-gram resulting List
+            if(current_length <= MAX_RESULTS) { //add to the list if the list is not at its maximum size
+                results.get(n).add("(" + current_length + ") " + entry.getKey() + ": " + entry.getValue());
+            }
+
+            //stop loop if all resulting list are filled
+            int full = 0;
+            for(int i = 2; i <= MAX_SIZE; i++) {
+                if(results.get(i).size() == MAX_RESULTS) {
+                    full++;
+                }
+            }
+            if(full == MAX_SIZE-2){
+                break;
+            }
+        }
+        return results;
+    }
+
+    public static int[] nGramCount(List<NGram> ALlNGrams){
+        int[] counts = new int[MAX_SIZE];
+        int totalNGrams = 0;
+        for(NGram ngram: ALlNGrams) {
+            for(int i = 0; i < ngram.getLength(); i++) {
+                counts[i]++;
+                totalNGrams++;
+            }
+        }
+
+        System.out.println("Total amount of NGrams: " + totalNGrams);
+        return counts;
     }
 
     public static List<NGram> createNGrams(String input){
@@ -120,8 +178,11 @@ public class NGramAnalyzer {
         Scanner scanner;
         try {
             scanner = new Scanner(new File(fileName));
-
+            int records = AMOUNT_RECORDS;
             while(scanner.hasNextLine()) {
+                if(records-- < 0) {
+                    break;
+                }
 
                 String[] text = scanner.nextLine().split("\\t");
                 String title = text[2];

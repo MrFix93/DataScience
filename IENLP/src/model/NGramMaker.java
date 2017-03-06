@@ -1,5 +1,5 @@
 package model;
-
+/*
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.WhitespaceTokenizer;
 import org.apache.lucene.analysis.ngram.EdgeNGramTokenFilter;
@@ -18,6 +18,7 @@ import java.util.List;
 /**
  * Created by peterwessels on 28/02/2017.
  */
+/*
 public class NGramMaker {
     private TokenStream tokens;
     private BufferedReader in;
@@ -61,6 +62,7 @@ public class NGramMaker {
      * @param text
      * @return
      */
+/*
     public static TokenStream tokenizeString(String text) {
         return new WhitespaceTokenizer(Version.LUCENE_36,  new StringReader(text));
     }
@@ -70,6 +72,7 @@ public class NGramMaker {
      * @param tk
      * @return
      */
+/*
     public static List<String> createNGramList(TokenStream tk) {
         List<String> result = new ArrayList<>();
 
@@ -89,3 +92,4 @@ public class NGramMaker {
     }
 
 }
+**/
