@@ -11,7 +11,7 @@ import static model.Util.sortByComparator;
 
 public class LanguageModelMaker {
     final static int MAX_SIZE = 4;
-    final static int AMOUNT_RECORDS =  100;
+    final static int AMOUNT_RECORDS =  19999;
     final static int RESULT_SIZE = 4;
     final static int MAX_RESULTS = 50;
     final static String END_DELIMITER = "TITLEEND";
