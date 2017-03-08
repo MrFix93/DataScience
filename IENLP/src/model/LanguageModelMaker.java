@@ -11,7 +11,7 @@ import static model.Util.sortByComparator;
 
 public class LanguageModelMaker {
     final static int MAX_SIZE = 4;
-    final static int AMOUNT_RECORDS =  19999;
+    final static int AMOUNT_RECORDS =  100;
     final static int RESULT_SIZE = 4;
     final static int MAX_RESULTS = 50;
     final static String END_DELIMITER = "TITLEEND";
@@ -46,6 +46,17 @@ public class LanguageModelMaker {
         Util.log("verbose", "Amount of n-grams found: " + this.NGramsProbability.size());
 
         this.save(path, filename);
+
+        SentenceModel sentenceModel = new SentenceModel(this.NGramsProbability,"Dimensioning an OBS Switch with Partial Wavelength Conversion and Fiber Delay Lines via a Mean Field Model");
+        List<String[]> test = sentenceModel.createSentenceSegments();
+
+        for (String[] segment: test) {
+            for (String word: segment) {
+                System.out.print(word + " ");
+            }
+            System.out.println(" prob: " + sentenceModel.segmentStickyness(segment));
+        }
+
 
         /*
         //System.out.println("FINISHED NGramsProbability; with " + NGramsProbability.size() + " NGrams and probabilities");

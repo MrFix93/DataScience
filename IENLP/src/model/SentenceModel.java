@@ -31,18 +31,32 @@ public class SentenceModel {
         this.modelSentence = modelString(sentence);
         this.NGramsProbability = NGramsProbability;
     }
-    public static List<String> createSentenceSegments(String sentence){ //Algorithm 1: Tweet Segmentation sigir12twiner
+    public List<String[]> createSentenceSegments(){ //Algorithm 1: Tweet Segmentation sigir12twiner
         List<String[]> segments = new ArrayList<>();
-        String[] sentenceWords = sentence.split("\\s");
+        String[] sentenceWords = this.modelSentence.split("\\s");
         for (int i = 1; i < sentenceWords.length; i++){
             String[] tempSegment = Arrays.copyOfRange(sentenceWords,0,i);
             if(i <= u){ //do not split
                 segments.add(tempSegment);
+                continue;
             }
-            for (int j = 1; j < i ;j++){// try different possible ways to segment
+            for (int j = 1; j < i - 1 ;j++){// try different possible ways to segment
                 if(i - j <= u){ //form two shorter segments
-                    String splitTempSegment1 = Arrays.copyOfRange(tempSegment,0,j);
-                    String splitTempSegment2 = Arrays.copyOfRange(tempSegment,0,j);
+                    //String[] splitTempSegment1 = Arrays.copyOfRange(tempSegment,0,j);
+                    String[] splitTempSegment2 = Arrays.copyOfRange(tempSegment,j,tempSegment.length - 1); //TODO in algoritm 1 range is j -1 to length however j to length seems to get better results
+                    segments.add(splitTempSegment2);
+                    /* //TODO implement v of algoritm 1
+                        10  foreach Sj ∈ j do
+                        11  concatenate Sj and s2
+                        i to form a new segmentation S
+                        of si;
+                        12 add S to i;
+                        13 C(S) = C(Sj) + C(s2
+                                i )
+                        14 Sort i and keep only the top e segmentations;
+                        15 return S ∈ l with the highest score as the optimal segmentation;
+                        3.
+                     */
 
                 }
             }
@@ -50,21 +64,19 @@ public class SentenceModel {
 
         }
 
-
-        return null;
+        return segments;
     }
 
-    public double segmentStickyness(String segment){
+    public double segmentStickyness(String[] segment){
         double scp = symmetricalConditionalProbability(segment);
         double stickyness = 2/(1 + Math.pow(Math.E,-scp));//formula (9) sigir12twiner
         return stickyness;
     }
-    public double symmetricalConditionalProbability(String segment){
-        double sentenceProbability = sentenceProbability(this.NGramsProbability,this.modelSentence);
-        String[] splitModelSentence = this.modelSentence.split("\\s");
+    public double symmetricalConditionalProbability(String[] segment){
+        double sentenceProbability = sentenceProbability(this.NGramsProbability,Arrays.toString(segment));
 
-        double scg = Math.pow(sentenceProbability,2)/; //formula (7) sigir12twiner;
-        return 1d;
+        double scg = Math.pow(sentenceProbability,2); //formula (7) sigir12twiner; TODO not complete
+        return scg;
     }
 
     public static String modelString(String sentence){
