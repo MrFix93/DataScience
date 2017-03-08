@@ -59,4 +59,5 @@ public class LanguageModel {
         //System.out.println("The probability for the sentence " + sentence + " is " + prob);
 
     }
+
 }
