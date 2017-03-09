@@ -48,13 +48,13 @@ public class LanguageModelMaker {
         this.save(path, filename);
 
         SentenceModel sentenceModel = new SentenceModel(this.NGramsProbability,"Dimensioning an OBS Switch with Partial Wavelength Conversion and Fiber Delay Lines via a Mean Field Model");
-        HashMap<Double,String[]> test = sentenceModel.createSentenceSegments();
+        HashMap<String[], Double> test = sentenceModel.createSentenceSegments();
 
-        for (Map.Entry<Double, String[]> segment: test.entrySet()) {
-            for (String word: segment.getValue()) {
+        for (Map.Entry<String[], Double> segment: test.entrySet()) {
+            for (String word: segment.getKey()) {
                 System.out.print(word + " ");
             }
-            System.out.println(" prob: " + segment.getKey());
+            System.out.println(" prob: " + segment.getValue());
         }
 
 

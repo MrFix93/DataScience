@@ -29,20 +29,21 @@ public class SentenceModel {
         this.modelSentence = modelString(sentence);
         this.NGramsProbability = NGramsProbability;
     }
-    public  HashMap<Double,String[]> createSentenceSegments() {
+
+    public  HashMap<String[], Double> createSentenceSegments() {
         return createSentenceSegments(this.modelSentence);
     }
 
-    public HashMap<Double,String[]> createSentenceSegments(String sentence){ //Algorithm 1: Tweet Segmentation sigir12twiner
-        HashMap<Double,String[]>  segments = new HashMap<>();
+    public HashMap<String[], Double> createSentenceSegments(String sentence){ //Algorithm 1: Tweet Segmentation sigir12twiner
+        HashMap<String, Double>  segments = new HashMap<>();
         String[] sentenceWords = sentence.split("\\s");
 
         for (int i = 0; i < sentenceWords.length - 1; i++){
             String[] tempSegment = Arrays.copyOfRange(sentenceWords,0,i + 1);
 
-            if(i <= u){ //do not split
+            if(i <= u) { //do not split
                 double stickyness = segmentStickyness(tempSegment);
-                segments.put(stickyness,tempSegment);
+                segments.put(String.join("\\s", tempSegment), stickyness);
                 continue;
             }
 
@@ -53,30 +54,32 @@ public class SentenceModel {
                     String[] splitTempSegment2 = Arrays.copyOfRange(tempSegment,j + 1,tempSegment.length - 1);
 
                     double sticknessSplitTempSegment2 = segmentStickyness(splitTempSegment2);
-                    String splitTempSegment1String = String.join(" ",splitTempSegment1);
+                    String splitTempSegment1String = String.join("\\s",splitTempSegment1);
 
-                    HashMap<Double,String[]>  segmentsIterator = createSentenceSegments(splitTempSegment1String);
-                    for (Map.Entry<Double,String[]> entry: segmentsIterator.entrySet() ) {
+                    HashMap<String, Double>  segmentsIterator = createSentenceSegments(splitTempSegment1String);
+                    for (Map.Entry<String, Double> entry: segmentsIterator.entrySet() ) {
 
-                        List<String> list = new ArrayList(Arrays.asList(entry.getValue()));
+                        List<String> list = new ArrayList(Arrays.asList(entry.getKey()));
                         list.addAll(Arrays.asList(splitTempSegment2));
-                        String[] newSegmentation = list.toArray(new String[0]);
+                        String newSegmentation = list.toArray();
 
-                        double stickyness = sticknessSplitTempSegment2 + segmentStickyness(entry.getValue());
-                        segments.put(stickyness,newSegmentation);
-                    }
-
-                    //sort
-                    Map<Double,String[]> sortedSegments = new TreeMap<Double,String[]>(segments);
-                    segments = new HashMap<>(); //empty segments
-                    int index = e;
-                    for (Map.Entry<Double,String[]> entry: sortedSegments.entrySet()) {
-                        if(index-- < 0)
-                            break;
-                        segments.put(entry.getKey(),entry.getValue());
+                        double stickyness = sticknessSplitTempSegment2 + segmentStickyness(entry.getKey());
+                        segments.put(newSegmentation, stickyness);
                     }
 
                 }
+
+                //sort
+                segments = Util.sortByValue(segments);
+                segments = new HashMap<>(); //empty segments
+                int index = e;
+                for (Map.Entry<String[],Double> entry: sortedSegments.entrySet()) {
+                    if(index-- < 0) {
+                        break;
+                    }
+                    segments.put(entry.getKey(),entry.getValue());
+                }
+
             }
         }
         return segments;
