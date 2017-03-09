@@ -1,10 +1,8 @@
 package model;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+
+
+import java.util.*;
 
 import static model.Util.cleanTitle;
 
@@ -31,51 +29,92 @@ public class SentenceModel {
         this.modelSentence = modelString(sentence);
         this.NGramsProbability = NGramsProbability;
     }
-    public List<String[]> createSentenceSegments(){ //Algorithm 1: Tweet Segmentation sigir12twiner
-        List<String[]> segments = new ArrayList<>();
-        String[] sentenceWords = this.modelSentence.split("\\s");
-        for (int i = 1; i < sentenceWords.length; i++){
-            String[] tempSegment = Arrays.copyOfRange(sentenceWords,0,i);
+    public  HashMap<Double,String[]> createSentenceSegments() {
+        return createSentenceSegments(this.modelSentence);
+    }
+
+    public HashMap<Double,String[]> createSentenceSegments(String sentence){ //Algorithm 1: Tweet Segmentation sigir12twiner
+        HashMap<Double,String[]>  segments = new HashMap<>();
+        String[] sentenceWords = sentence.split("\\s");
+
+        for (int i = 0; i < sentenceWords.length - 1; i++){
+            String[] tempSegment = Arrays.copyOfRange(sentenceWords,0,i + 1);
+
             if(i <= u){ //do not split
-                segments.add(tempSegment);
+                double stickyness = segmentStickyness(tempSegment);
+                segments.put(stickyness,tempSegment);
                 continue;
             }
-            for (int j = 1; j < i - 1 ;j++){// try different possible ways to segment
+
+            for (int j = 1; j < i ;j++){// try different possible ways to segment
                 if(i - j <= u){ //form two shorter segments
-                    //String[] splitTempSegment1 = Arrays.copyOfRange(tempSegment,0,j);
-                    String[] splitTempSegment2 = Arrays.copyOfRange(tempSegment,j,tempSegment.length - 1); //TODO in algoritm 1 range is j -1 to length however j to length seems to get better results
-                    segments.add(splitTempSegment2);
-                    /* //TODO implement v of algoritm 1
-                        10  foreach Sj ∈ j do
-                        11  concatenate Sj and s2
-                        i to form a new segmentation S
-                        of si;
-                        12 add S to i;
-                        13 C(S) = C(Sj) + C(s2
-                                i )
-                        14 Sort i and keep only the top e segmentations;
-                        15 return S ∈ l with the highest score as the optimal segmentation;
-                        3.
-                     */
+
+                    String[] splitTempSegment1 = Arrays.copyOfRange(tempSegment,0,j);
+                    String[] splitTempSegment2 = Arrays.copyOfRange(tempSegment,j + 1,tempSegment.length - 1);
+
+                    double sticknessSplitTempSegment2 = segmentStickyness(splitTempSegment2);
+                    String splitTempSegment1String = String.join(" ",splitTempSegment1);
+
+                    HashMap<Double,String[]>  segmentsIterator = createSentenceSegments(splitTempSegment1String);
+                    for (Map.Entry<Double,String[]> entry: segmentsIterator.entrySet() ) {
+
+                        List<String> list = new ArrayList(Arrays.asList(entry.getValue()));
+                        list.addAll(Arrays.asList(splitTempSegment2));
+                        String[] newSegmentation = list.toArray(new String[0]);
+
+                        double stickyness = sticknessSplitTempSegment2 + segmentStickyness(entry.getValue());
+                        segments.put(stickyness,newSegmentation);
+                    }
+
+                    //sort
+                    Map<Double,String[]> sortedSegments = new TreeMap<Double,String[]>(segments);
+                    segments = new HashMap<>(); //empty segments
+                    int index = e;
+                    for (Map.Entry<Double,String[]> entry: sortedSegments.entrySet()) {
+                        if(index-- < 0)
+                            break;
+                        segments.put(entry.getKey(),entry.getValue());
+                    }
 
                 }
             }
-
-
         }
-
         return segments;
+    }
+
+    public double normalizatedStickyness(){//TODO formula (12) of sigir12twiner
+        return 1d;
     }
 
     public double segmentStickyness(String[] segment){
         double scp = symmetricalConditionalProbability(segment);
-        double stickyness = 2/(1 + Math.pow(Math.E,-scp));//formula (9) sigir12twiner
+        double stickyness = 2d/(1d + Math.pow(Math.E,-scp));//formula (9) sigir12twiner
         return stickyness;
     }
     public double symmetricalConditionalProbability(String[] segment){
-        double sentenceProbability = sentenceProbability(this.NGramsProbability,Arrays.toString(segment));
 
-        double scg = Math.pow(sentenceProbability,2); //formula (7) sigir12twiner; TODO not complete
+        String segmentString = String.join(" ",segment);
+        if (!this.NGramsProbability.containsKey(segmentString)){
+            System.out.println("segment string does not excist in prob {" + segmentString + "}");
+            return 0d;
+        }
+
+        double totalProbability = this.NGramsProbability.get(segmentString);
+
+        double prob = 1d;
+        for (int i = 0; i < segment.length - 1;i++){
+            String s1 = String.join(" ",Arrays.copyOfRange(segment,0,i));
+            String s2 = String.join(" ",Arrays.copyOfRange(segment,i + 1 ,segment.length - 1));
+            if(this.NGramsProbability.containsKey(s1)){
+                prob *= this.NGramsProbability.get(s1);
+            }//TODO what if not excist
+            if(this.NGramsProbability.containsKey(s2)){
+                prob *= this.NGramsProbability.get(s2);
+            }
+
+        }
+        double divisor = (1d / (((double) segment.length) - 1d)) * prob;
+        double scg = Math.pow(totalProbability,2) / divisor; //formula (7) sigir12twiner; TODO not complete
         return scg;
     }
 
@@ -83,30 +122,5 @@ public class SentenceModel {
         return LanguageModelMaker.START_DELIMITER + " " + cleanTitle(sentence) + " " + LanguageModelMaker.END_DELIMITER;
     }
 
-    public static double sentenceProbability(HashMap<String, Double> NGramsProbability, String sentence){
-        sentence = modelString(sentence);
-        String[] sentenceWords = sentence.split("\\s");
 
-        double prob = 0d;
-        wordProb :
-        for (int wordIndex = 0; wordIndex < sentenceWords.length; wordIndex++){
-            String key = sentenceWords[wordIndex];
-            for (int n = 1; n < LanguageModelMaker.MAX_SIZE; n++ ){
-                if(wordIndex - n < 0) {
-                    continue wordProb;
-                }
-
-                key = sentenceWords[wordIndex - n] + " " + key;
-
-                //System.out.println("the word is: " + key);
-                if(NGramsProbability.containsKey(key)){
-                    double wordProb = NGramsProbability.get(key);
-                    //System.out.println("the prob of " + key + " is " + wordProb);
-                    prob += Math.log10(wordProb);
-                }
-            }
-        }
-        //System.out.println("The probability for the sentence " + sentence + " is " + prob);
-    return prob;
-    }
 }

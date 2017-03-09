@@ -32,6 +32,31 @@ public class LanguageModel {
             e.printStackTrace();
         }
     }
+    public double sentenceProbability(String sentence){
+        sentence = LanguageModelMaker.START_DELIMITER + " " + cleanTitle(sentence) + " " + LanguageModelMaker.END_DELIMITER;
+        String[] sentenceWords = sentence.split("\\s");
+
+        double prob = 0d;
+        wordProb :
+        for (int wordIndex = 0; wordIndex < sentenceWords.length; wordIndex++){
+            String key = sentenceWords[wordIndex];
+            for (int n = 1; n < LanguageModelMaker.MAX_SIZE; n++ ){
+                if(wordIndex - n < 0) {
+                    continue wordProb;
+                }
+
+                key = sentenceWords[wordIndex - n] + " " + key;
+
+                //System.out.println("the word is: " + key);
+                if(this.NGrams.containsKey(key)){
+                    double wordProb = this.NGrams.get(key);
+                    //System.out.println("the prob of " + key + " is " + wordProb);
+                    prob += Math.log10(wordProb);
+                }
+            }
+        }
+        return prob;
+    }
 
 
 
