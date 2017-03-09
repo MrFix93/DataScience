@@ -1,11 +1,10 @@
 package model;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 import static model.Util.cleanTitle;
 
@@ -15,23 +14,55 @@ import static model.Util.cleanTitle;
 public class LanguageModel {
     Map<String, Double> NGrams = new HashMap<>();
     BufferedReader in;
+    String defaultCorpus = "/Users/peterwessels/Documents/Studie/Data Science/IENLP/data/DBLPTrainset(1).txt.corpus";
 
-
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         LanguageModel lm = new LanguageModel();
         lm.in = new BufferedReader(new InputStreamReader(System.in));
         lm.start();
     }
 
-    public void start() {
+    public void start() throws IOException {
+        boolean run = true;
+
+        System.out.println("Please enter the path + filename of the to-be-used corpus. Enter '1' for the default corpus.");
+        String input = this.in.readLine();
+
         try {
-            String input = this.in.readLine();
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
+            if(input.equals("1")) {
+                this.load(defaultCorpus);
+            } else {
+                this.load(input);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("This file could not be found, please try again.");
+            this.start();
         }
+
+        while(run) {
+            System.out.println("Enter a sentence");
+            String sentence = this.in.readLine();
+            Double probability = this.sentenceProbability(sentence);
+            System.out.println("The probability is " + probability);
+        }
+
     }
+
+    public String load(String fileName) throws FileNotFoundException {
+        String result = "";
+
+        Scanner scanner;
+
+        scanner = new Scanner(new File(fileName));
+        while(scanner.hasNextLine()) {
+            String[] text = scanner.nextLine().split("\\t");
+            this.NGrams.put(text[0],Double.parseDouble(text[1]));
+        }
+
+        return result;
+    }
+
+
     public double sentenceProbability(String sentence){
         sentence = LanguageModelMaker.START_DELIMITER + " " + cleanTitle(sentence) + " " + LanguageModelMaker.END_DELIMITER;
         String[] sentenceWords = sentence.split("\\s");
