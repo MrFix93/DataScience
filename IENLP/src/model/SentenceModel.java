@@ -34,7 +34,7 @@ public class SentenceModel {
         return createSentenceSegments(this.modelSentence);
     }
 
-    public HashMap<String[], Double> createSentenceSegments(String sentence){ //Algorithm 1: Tweet Segmentation sigir12twiner
+    public HashMap<String, Double> createSentenceSegments(String sentence){ //Algorithm 1: Tweet Segmentation sigir12twiner
         HashMap<String, Double>  segments = new HashMap<>();
         String[] sentenceWords = sentence.split("\\s");
 
@@ -53,15 +53,15 @@ public class SentenceModel {
                     String[] splitTempSegment1 = Arrays.copyOfRange(tempSegment,0,j);
                     String[] splitTempSegment2 = Arrays.copyOfRange(tempSegment,j + 1,tempSegment.length - 1);
 
-                    double sticknessSplitTempSegment2 = segmentStickyness(splitTempSegment2);
+
                     String splitTempSegment1String = String.join("\\s",splitTempSegment1);
+                    String splitTempSegment2String = String.join("\\s",splitTempSegment2);
+                    double sticknessSplitTempSegment2 = segmentStickyness(splitTempSegment2String);
 
                     HashMap<String, Double>  segmentsIterator = createSentenceSegments(splitTempSegment1String);
                     for (Map.Entry<String, Double> entry: segmentsIterator.entrySet() ) {
 
-                        List<String> list = new ArrayList(Arrays.asList(entry.getKey()));
-                        list.addAll(Arrays.asList(splitTempSegment2));
-                        String newSegmentation = list.toArray();
+                        String newSegmentation = entry.getKey() +  " " + splitTempSegment2String;
 
                         double stickyness = sticknessSplitTempSegment2 + segmentStickyness(entry.getKey());
                         segments.put(newSegmentation, stickyness);
@@ -89,25 +89,24 @@ public class SentenceModel {
         return 1d;
     }
 
-    public double segmentStickyness(String[] segment){
+    public double segmentStickyness(String segment){
         double scp = symmetricalConditionalProbability(segment);
         double stickyness = 2d/(1d + Math.pow(Math.E,-scp));//formula (9) sigir12twiner
         return stickyness;
     }
-    public double symmetricalConditionalProbability(String[] segment){
-
-        String segmentString = String.join(" ",segment);
-        if (!this.NGramsProbability.containsKey(segmentString)){
-            System.out.println("segment string does not excist in prob {" + segmentString + "}");
+    public double symmetricalConditionalProbability(String segment){
+        if (!this.NGramsProbability.containsKey(segment)){
+            System.out.println("segment string does not excist in prob {" + segment + "}");
             return 0d;
         }
 
-        double totalProbability = this.NGramsProbability.get(segmentString);
+        double totalProbability = this.NGramsProbability.get(segment);
+        String[]  segmentArray = segment.split("\\s");
 
         double prob = 1d;
-        for (int i = 0; i < segment.length - 1;i++){
-            String s1 = String.join(" ",Arrays.copyOfRange(segment,0,i));
-            String s2 = String.join(" ",Arrays.copyOfRange(segment,i + 1 ,segment.length - 1));
+        for (int i = 0; i < segmentArray.length - 1;i++){
+            String s1 = String.join("\\s",Arrays.copyOfRange(segmentArray,0,i));
+            String s2 = String.join("\\s",Arrays.copyOfRange(segmentArray,i + 1 ,segmentArray.length - 1));
             if(this.NGramsProbability.containsKey(s1)){
                 prob *= this.NGramsProbability.get(s1);
             }//TODO what if not excist
@@ -116,7 +115,7 @@ public class SentenceModel {
             }
 
         }
-        double divisor = (1d / (((double) segment.length) - 1d)) * prob;
+        double divisor = (1d / (((double) segmentArray.length) - 1d)) * prob;
         double scg = Math.pow(totalProbability,2) / divisor; //formula (7) sigir12twiner; TODO not complete
         return scg;
     }
