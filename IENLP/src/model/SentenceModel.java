@@ -30,7 +30,7 @@ public class SentenceModel {
         this.NGramsProbability = NGramsProbability;
     }
 
-    public  HashMap<String[], Double> createSentenceSegments() {
+    public  HashMap<String, Double> createSentenceSegments() {
         return createSentenceSegments(this.modelSentence);
     }
 
