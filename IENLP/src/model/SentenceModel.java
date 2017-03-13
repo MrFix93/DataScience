@@ -11,8 +11,9 @@ import static model.Util.cleanTitle;
  */
 public class SentenceModel {
 
-    private String modelSentence;
+    private String sentence;
     private HashMap<String, Double> NGramsProbability;
+    private HashMap<Integer, HashMap<String, Double>> segments;
     /* 3.1 sigir12twiner
     u = 5 is a proper bound as the maximum
     length of a segment, which largely reduces the number of possible
@@ -26,29 +27,35 @@ public class SentenceModel {
     private static int e = 5;
 
     SentenceModel(HashMap<String, Double> NGramsProbability, String sentence){
-        this.modelSentence = modelString(sentence);
+        this.sentence = modelString(sentence);
         this.NGramsProbability = NGramsProbability;
     }
 
-    public  HashMap<String, Double> createSentenceSegments() {
-        return createSentenceSegments(this.modelSentence);
+    public void createSentenceSegments() {
+        this.segments = new HashMap<>();
+
+        for(int i = 1; i <= this.sentence.length(); i++) {
+            this.segments.put(i, createSentenceSegments(this.sentence, i));
+        }
     }
 
-    public HashMap<String, Double> createSentenceSegments(String sentence){ //Algorithm 1: Tweet Segmentation sigir12twiner
-        HashMap<String, Double>  segments = new HashMap<>();
+    public HashMap<String, Double> createSentenceSegments(String sentence, Integer I){
+        //Algorithm 1: Tweet Segmentation sigir12twiner
+        HashMap<String, Double> segments = new HashMap<>();
         String[] sentenceWords = sentence.split("\\s");
 
-        for (int i = 0; i < sentenceWords.length - 1; i++){
+        for (int i = I; i < sentenceWords.length - 1; i++){
             String[] tempSegment = Arrays.copyOfRange(sentenceWords,0,i + 1);
 
             if(i <= u) { //do not split
                 double stickyness = segmentStickyness(tempSegment);
                 segments.put(String.join(" ", tempSegment), stickyness);
-                continue;
             }
 
-            for (int j = 1; j < i ;j++){// try different possible ways to segment
-                if(i - j <= u){ //form two shorter segments
+            for (int j = 1; j < i ;j++){
+                // try different possible ways to segment
+                if(i - j <= u){
+                    //form two shorter segments
 
                     String[] splitTempSegment1 = Arrays.copyOfRange(tempSegment,0,j);
                     String[] splitTempSegment2 = Arrays.copyOfRange(tempSegment,j + 1,tempSegment.length - 1);
@@ -57,7 +64,8 @@ public class SentenceModel {
                     String splitTempSegment2String = String.join(" ",splitTempSegment2);
                     double sticknessSplitTempSegment2 = segmentStickyness(splitTempSegment2String);
 
-                    HashMap<String, Double>  segmentsIterator = createSentenceSegments(splitTempSegment1String);
+                    HashMap<String, Double> segmentsIterator = this.segments.get(j);
+
                     for (Map.Entry<String, Double> entry: segmentsIterator.entrySet() ) {
 
                         String newSegmentation = entry.getKey() +  " " + splitTempSegment2String;
