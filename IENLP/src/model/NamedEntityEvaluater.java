@@ -52,17 +52,16 @@ public class NamedEntityEvaluater {
 
             System.out.println(args[i]);
             System.out.println("true_positives: " + NEE.confusionMatrix.true_positives + "; false_positives: " + NEE.confusionMatrix.false_positives + "; true_negatives: " + NEE.confusionMatrix.true_negatives + "; false_negatives: " + NEE.confusionMatrix.false_negatives);
+
+            double micro_average_precision = microAveragePrecision(NEE.confusionMatrix);
+            double micro_average_recall = microAverageRecall(NEE.confusionMatrix);
+            double f1_score =  f1Score(micro_average_precision,micro_average_recall);
+
+            System.out.println("micro_average_precision: " + micro_average_precision);
+            System.out.println("micro_average_recall: " + micro_average_recall);
+            System.out.println("f1_score: " + f1_score);
             System.out.println();
         }
-
-        ConfusionMatrix totalConfusionMatrix = totalConfusionMatrix(evaluations);
-        double micro_average_precision = microAveragePrecision(totalConfusionMatrix);
-        double micro_average_recall = microAverageRecall(totalConfusionMatrix);
-        double f1_score =  f1Score(micro_average_precision,micro_average_recall);
-
-        System.out.println("micro_average_precision: " + micro_average_precision);
-        System.out.println("micro_average_recall: " + micro_average_recall);
-        System.out.println("f1_score: " + f1_score);
 
     }
 
@@ -88,16 +87,6 @@ public class NamedEntityEvaluater {
 //            System.out.println("");
 
         }
-    }
-
-    private static ConfusionMatrix totalConfusionMatrix(List<NamedEntityEvaluater> evaluations){
-        ConfusionMatrix totalConfusionMatrix = new ConfusionMatrix();
-
-        for (NamedEntityEvaluater evaluation : evaluations) {
-            totalConfusionMatrix.combine(evaluation.confusionMatrix);
-        }
-
-        return totalConfusionMatrix;
     }
 
     private static double f1Score(double precision,double recall){
@@ -129,6 +118,7 @@ public class NamedEntityEvaluater {
     }
 
     private static int[] inList (HashMap<String,List<String>> list, HashMap<String,List<String>> entries){
+
 
         int trueV = 0;
         int falseV = 0;
@@ -266,4 +256,5 @@ public class NamedEntityEvaluater {
 
         return results;
     }
+
 }
