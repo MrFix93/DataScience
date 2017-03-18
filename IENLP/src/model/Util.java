@@ -65,4 +65,5 @@ public class Util {
     public static void log(String type, String message) {
         System.out.println("[" + type + "] " + message);
     }
+
 }

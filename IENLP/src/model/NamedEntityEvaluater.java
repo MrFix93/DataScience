@@ -1,108 +1,179 @@
 package model;
 
+import model.NamedEntityClassifiers.NamedEntityClassifier;
+import model.NamedEntityClassifiers.NamedEntityClassifier_3class;
+import model.NamedEntityClassifiers.NamedEntityClassifier_4class;
+import model.NamedEntityClassifiers.NamedEntityClassifier_7class;
+
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.InputStreamReader;
-import java.lang.reflect.Array;
 import java.util.*;
-
-import static model.NamedEntityEvaluater.groundTruth;
-import static model.Util.cleanTitle;
 
 /**
  * Created by Joep on 17-Mar-17.
  */
 public class NamedEntityEvaluater {
-    private List<String>  all_sentences;
-    final static int AMOUNT_RECORDS = 100;
 
-    final static String TAG_ORGANIZATION = "ORG";
-    final static String START_TAG_ORGANIZATION = "<ORGANIZATION>";
-    final static String STOP_TAG_ORGANIZATION = "</ORGANIZATION>";
 
-    final static String TAG_LOCATION  = "LOC";
-    final static String START_TAG_LOCATION = "<LOCATION>";
-    final static String STOP_TAG_LOCATION = "</LOCATION>";
+    private NamedEntityClassifier classifier;
+    private ConfusionMatrix confusionMatrix;
 
-    final static String TAG_PERSON  = "PER";
-    final static String START_TAG_PERSON = "<PERSON>";
-    final static String STOP_TAG_PERSON = "</PERSON>";
+    public NamedEntityEvaluater(String classClassifier){
 
-    public int true_positives = 0;
-    public int false_positives = 0;
-    public int false_negatives = 0;
-    public int true_negatives = 0;
+        if(classClassifier.equals(NamedEntityClassifier_3class.typeClass)) {
+            this.classifier = new NamedEntityClassifier_3class();
 
-    public NamedEntityEvaluater(){}
+        }else if(classClassifier.equals(NamedEntityClassifier_4class.typeClass)){
+            this.classifier = new NamedEntityClassifier_4class();
+
+        }else if(classClassifier.equals(NamedEntityClassifier_7class.typeClass)){
+            this.classifier = new NamedEntityClassifier_7class();
+        }
+
+        this.confusionMatrix = new ConfusionMatrix();
+    }
 
     public static void main(String[] args) {
-        NamedEntityEvaluater NEE = new NamedEntityEvaluater();
-        NEE.start(args[0]);
+
+        List<NamedEntityEvaluater> evaluations = new ArrayList<>();
+
+        for(int i = 0; i < args.length; i+=2) {
+            NamedEntityEvaluater NEE = new NamedEntityEvaluater(args[i + 1]);
+            NEE.start(args[i]);
+            evaluations.add(NEE);
+        }
+
+        ConfusionMatrix totalConfusionMatrix = totalConfusionMatrix(evaluations);
+        double micro_average_precision = microAveragePrecision(totalConfusionMatrix);
+        double micro_average_recall = microAverageRecall(totalConfusionMatrix);
+
+        System.out.println("micro_average_precision: " + micro_average_precision);
+        System.out.println("micro_average_recall: " + micro_average_recall);
+
+
+
     }
 
-    public void start(String fileName){
-        all_sentences = readFile(fileName);
+    private static ConfusionMatrix totalConfusionMatrix(List<NamedEntityEvaluater> evaluations){
+        ConfusionMatrix totalConfusionMatrix = new ConfusionMatrix();
+
+        for (NamedEntityEvaluater evaluation : evaluations) {
+            totalConfusionMatrix.combine(evaluation.confusionMatrix);
+        }
+
+        return totalConfusionMatrix;
+    }
+
+    private static double microAveragePrecision(ConfusionMatrix totalConfusionMatrix){
+
+        return (double)totalConfusionMatrix.true_positives / (double)(totalConfusionMatrix.true_positives + totalConfusionMatrix.false_positives);
+    }
+
+    private static double microAverageRecall(ConfusionMatrix totalConfusionMatrix){
+
+        return (double)totalConfusionMatrix.true_positives / (double)(totalConfusionMatrix.true_positives + totalConfusionMatrix.false_negatives);
+    }
+
+    private void start(String fileName){
+        List<String> all_sentences = readFile(fileName);
 
         for (String sentence : all_sentences) {
+
             String [] tabSeperatedSentence= sentence.split("\\t");
+
             HashMap<String,List<String>> groundTruthEntities = groundTruth(tabSeperatedSentence[1]);
             HashMap<String,List<String>> foundEntities = sentenceEntities(tabSeperatedSentence[2]);
+
+            ConfusionMatrix sentenceConfusionMatrix = calculateSentenceConfusionMatrix(groundTruthEntities,foundEntities);
+            confusionMatrix.combine(sentenceConfusionMatrix); //add to total
+
+
+//            System.out.println("number: "+ tabSeperatedSentence[0] + " sentence {" + tabSeperatedSentence[2]+"}");
+//            System.out.println("ground truth:");
+//            printEntities(groundTruthEntities);
+//            System.out.println("found entities:");
+//            printEntities(foundEntities);
+//            System.out.println("true_positives: " + sentenceConfusionMatrix.true_positives + "; false_positives: " + sentenceConfusionMatrix.false_positives + "; true_negatives: " + sentenceConfusionMatrix.true_negatives + "; false_negatives: " + sentenceConfusionMatrix.false_negatives);
+//            System.out.println("");
+
         }
+        System.out.println(fileName);
+        System.out.println("true_positives: " + confusionMatrix.true_positives + "; false_positives: " + confusionMatrix.false_positives + "; true_negatives: " + confusionMatrix.true_negatives + "; false_negatives: " + confusionMatrix.false_negatives);
+        System.out.println();
+
     }
 
-    public static HashMap<String,List<String>> sentenceEntities(String sentence){
-        HashMap<String,List<String>> result = new HashMap<>();
+    private static ConfusionMatrix calculateSentenceConfusionMatrix(HashMap<String,List<String>> groundTruth, HashMap<String,List<String>> found) {
+        ConfusionMatrix sentenceConfusionMatrix = new ConfusionMatrix();
 
-        List<String> words = Arrays.asList(sentence.split("\\s"));
+        int[] positives = inList(found,groundTruth);
+        sentenceConfusionMatrix.true_positives += positives[0];
+        sentenceConfusionMatrix.false_positives += positives[1];
 
-        List<String> organisationEntities = sentenceEntitiesForType(words,START_TAG_ORGANIZATION,STOP_TAG_ORGANIZATION);
-        result.put(TAG_ORGANIZATION,organisationEntities);
+        int[] negatives = inList(groundTruth,found);
+        sentenceConfusionMatrix.true_negatives += negatives[0]; //TODO not sure how to calculate this!
+        sentenceConfusionMatrix.false_negatives += negatives[1];
 
-        List<String> locationEntities = sentenceEntitiesForType(words,START_TAG_LOCATION,STOP_TAG_LOCATION);
-        result.put(TAG_LOCATION,organisationEntities);
+        return sentenceConfusionMatrix;
 
-        List<String> personEntities = sentenceEntitiesForType(words,START_TAG_PERSON,STOP_TAG_PERSON);
-        result.put(TAG_PERSON,organisationEntities);
-
-        return result;
     }
 
-    public static List<String> sentenceEntitiesForType(List<String> words, String start, String stop){
-        List<String> result = new ArrayList<>();
+    private static int[] inList (HashMap<String,List<String>> list, HashMap<String,List<String>> entries){
 
-        while(words.indexOf(start) != -1) {
+        int trueV = 0;
+        int falseV = 0;
 
-            int startEntity = words.indexOf(start);
-            int stopEntity = words.indexOf(stop);
+        for (Map.Entry<String,List<String>> listEntry: list.entrySet()) {
+            String key = listEntry.getKey();
 
-            List<String> stringList = words.subList(startEntity + 1, stopEntity - 1);
-            String string = String.join(" ", stringList);
+            if(entries.containsKey(key)){
 
-            result.add(string);
-            words.subList(stopEntity,words.size() - 1);
-        }
+                List<String> entriesStrings = entries.get(key);
+                List<String> listStrings = listEntry.getValue();
 
-        return result;
-    }
+                listLoop:
+                for (String listItem : listStrings) {
 
-    public static HashMap<String,List<String>> groundTruth(String truthString){
-        System.out.println("String {" + truthString + "}");
-        HashMap<String,List<String>> result = new HashMap<>();
+                    for (String entyItem: entriesStrings){
+                        if(listItem.equals(entyItem)){
+                            trueV += 1;
+                            continue listLoop;
+                        }
 
-        String[] namedEntities = truthString.split(";");
+                    }
 
-        for (String entity: namedEntities) {
-            System.out.println("entity {" + entity + "}");
-            String[] typeAndString =  entity.split("/");
-            System.out.println("length type and string " + typeAndString.toString());
-            String type = typeAndString[0];
-            String string = typeAndString[1];
+                    falseV += 1;
 
-            if(result.containsKey(type)){ //add to the list
-                result.get(type).add(string);
+                }
             }else{
-                List<String> strings = new ArrayList<String>(Arrays.asList(string));
-                result.put(type,strings);
+                falseV += 1;
+            }
+        }
+
+        int[] result = {trueV,falseV};
+        return result;
+    }
+
+
+    private static void printEntities(HashMap<String,List<String>> list){
+        for (Map.Entry<String,List<String>> entry: list.entrySet()) {
+            System.out.print("type {" + entry.getKey() +"} ");
+            for (String string: entry.getValue()) {
+                System.out.print("{" + string + "}");
+            }
+            System.out.println(";");
+        }
+    }
+
+    private  HashMap<String,List<String>> sentenceEntities(String sentence){
+
+        HashMap<String,List<String>> result = new HashMap<>();
+
+        for (NamedEntityClassifier.NamedEntityType namedEntity: classifier.entityTypes) {
+
+            List<String> entityStrings = sentenceEntitiesForType(sentence,namedEntity.START,namedEntity.STOP);
+            if(entityStrings.size() > 0) {
+                result.put(namedEntity.TAG, entityStrings);
             }
 
         }
@@ -110,28 +181,74 @@ public class NamedEntityEvaluater {
         return result;
     }
 
+    private static List<String> sentenceEntitiesForType(String sentence, String start, String stop){
 
+        List<String> result = new ArrayList<>();
 
+        while(sentence.contains(start) || sentence.contains(stop)) {
 
+            int startEntity = sentence.indexOf(start);
+            int stopEntity = sentence.indexOf(stop);
+            int cutOff = stopEntity + stop.length();
 
-    public static List<String>  readFile(String fileName){
+            if(stopEntity == -1){ //close tag is not placed if it is at the end of the sentence
+                //System.out.println("last tag is missing");
+                stopEntity = sentence.length() - 1;
+                cutOff = sentence.length();
+            }
+            if(startEntity == -1 || startEntity > stopEntity){
+                //System.out.println("first tag is missing");
+                startEntity = -start.length();
+            }
+            String string = sentence.substring(startEntity + start.length(), stopEntity);
+
+            result.add(string);
+
+            sentence = sentence.substring(cutOff);
+        }
+
+        return result;
+    }
+
+    private static HashMap<String,List<String>> groundTruth(String truthString){
+        HashMap<String,List<String>> result = new HashMap<>();
+
+        if(!truthString.isEmpty()) {
+
+            String[] namedEntities = truthString.split(";");
+
+            for (String entity : namedEntities) {
+
+                String[] typeAndString = entity.split("/");
+                String type = typeAndString[0];
+                String string = typeAndString[1];
+
+                if (result.containsKey(type)) { //add to the list
+                    result.get(type).add(string);
+                } else {
+                    List<String> strings = new ArrayList<>(Arrays.asList(string));
+                    result.put(type, strings);
+                }
+
+            }
+
+        }
+        return result;
+    }
+
+    private static List<String>  readFile(String fileName){
         List<String> results = new ArrayList<>();
 
         Scanner scanner;
-        try {
-            scanner = new Scanner(new File(fileName));
-            int records = AMOUNT_RECORDS;
-            while(scanner.hasNextLine()) {
-                if(records-- < 0) {
-                    break;
-                }
 
-                //String[] text = scanner.nextLine().split("\\t");
+        try {
+
+            scanner = new Scanner(new File(fileName));
+
+            while(scanner.hasNextLine()) {
+
                 results.add(scanner.nextLine());
-//                String title = text[2];
-//                title = cleanTitle(title);
-//
-//                result += title;
+
             }
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
