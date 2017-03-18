@@ -14,20 +14,28 @@ import java.util.*;
  */
 public class NamedEntityEvaluater {
 
-
     private NamedEntityClassifier classifier;
     private ConfusionMatrix confusionMatrix;
 
-    public NamedEntityEvaluater(String classClassifier){
+    private NamedEntityEvaluater(String classClassifier){
 
-        if(classClassifier.equals(NamedEntityClassifier_3class.typeClass)) {
-            this.classifier = new NamedEntityClassifier_3class();
+        switch (classClassifier) {
+            case NamedEntityClassifier_3class.typeClass:
+                this.classifier = new NamedEntityClassifier_3class();
 
-        }else if(classClassifier.equals(NamedEntityClassifier_4class.typeClass)){
-            this.classifier = new NamedEntityClassifier_4class();
+                break;
+            case NamedEntityClassifier_4class.typeClass:
+                this.classifier = new NamedEntityClassifier_4class();
 
-        }else if(classClassifier.equals(NamedEntityClassifier_7class.typeClass)){
-            this.classifier = new NamedEntityClassifier_7class();
+                break;
+            case NamedEntityClassifier_7class.typeClass:
+                this.classifier = new NamedEntityClassifier_7class();
+
+                break;
+            default:
+                this.classifier = new NamedEntityClassifier_3class();
+
+                break;
         }
 
         this.confusionMatrix = new ConfusionMatrix();
@@ -41,37 +49,21 @@ public class NamedEntityEvaluater {
             NamedEntityEvaluater NEE = new NamedEntityEvaluater(args[i + 1]);
             NEE.start(args[i]);
             evaluations.add(NEE);
+
+            System.out.println(args[i]);
+            System.out.println("true_positives: " + NEE.confusionMatrix.true_positives + "; false_positives: " + NEE.confusionMatrix.false_positives + "; true_negatives: " + NEE.confusionMatrix.true_negatives + "; false_negatives: " + NEE.confusionMatrix.false_negatives);
+            System.out.println();
         }
 
         ConfusionMatrix totalConfusionMatrix = totalConfusionMatrix(evaluations);
         double micro_average_precision = microAveragePrecision(totalConfusionMatrix);
         double micro_average_recall = microAverageRecall(totalConfusionMatrix);
+        double f1_score =  f1Score(micro_average_precision,micro_average_recall);
 
         System.out.println("micro_average_precision: " + micro_average_precision);
         System.out.println("micro_average_recall: " + micro_average_recall);
+        System.out.println("f1_score: " + f1_score);
 
-
-
-    }
-
-    private static ConfusionMatrix totalConfusionMatrix(List<NamedEntityEvaluater> evaluations){
-        ConfusionMatrix totalConfusionMatrix = new ConfusionMatrix();
-
-        for (NamedEntityEvaluater evaluation : evaluations) {
-            totalConfusionMatrix.combine(evaluation.confusionMatrix);
-        }
-
-        return totalConfusionMatrix;
-    }
-
-    private static double microAveragePrecision(ConfusionMatrix totalConfusionMatrix){
-
-        return (double)totalConfusionMatrix.true_positives / (double)(totalConfusionMatrix.true_positives + totalConfusionMatrix.false_positives);
-    }
-
-    private static double microAverageRecall(ConfusionMatrix totalConfusionMatrix){
-
-        return (double)totalConfusionMatrix.true_positives / (double)(totalConfusionMatrix.true_positives + totalConfusionMatrix.false_negatives);
     }
 
     private void start(String fileName){
@@ -87,7 +79,6 @@ public class NamedEntityEvaluater {
             ConfusionMatrix sentenceConfusionMatrix = calculateSentenceConfusionMatrix(groundTruthEntities,foundEntities);
             confusionMatrix.combine(sentenceConfusionMatrix); //add to total
 
-
 //            System.out.println("number: "+ tabSeperatedSentence[0] + " sentence {" + tabSeperatedSentence[2]+"}");
 //            System.out.println("ground truth:");
 //            printEntities(groundTruthEntities);
@@ -97,10 +88,29 @@ public class NamedEntityEvaluater {
 //            System.out.println("");
 
         }
-        System.out.println(fileName);
-        System.out.println("true_positives: " + confusionMatrix.true_positives + "; false_positives: " + confusionMatrix.false_positives + "; true_negatives: " + confusionMatrix.true_negatives + "; false_negatives: " + confusionMatrix.false_negatives);
-        System.out.println();
+    }
 
+    private static ConfusionMatrix totalConfusionMatrix(List<NamedEntityEvaluater> evaluations){
+        ConfusionMatrix totalConfusionMatrix = new ConfusionMatrix();
+
+        for (NamedEntityEvaluater evaluation : evaluations) {
+            totalConfusionMatrix.combine(evaluation.confusionMatrix);
+        }
+
+        return totalConfusionMatrix;
+    }
+
+    private static double f1Score(double precision,double recall){
+        return 2d * ((precision * recall) / (precision + recall));
+    }
+
+    private static double microAveragePrecision(ConfusionMatrix totalConfusionMatrix){
+        return (double)totalConfusionMatrix.true_positives / (double)(totalConfusionMatrix.true_positives + totalConfusionMatrix.false_positives);
+    }
+
+    private static double microAverageRecall(ConfusionMatrix totalConfusionMatrix){
+
+        return (double)totalConfusionMatrix.true_positives / (double)(totalConfusionMatrix.true_positives + totalConfusionMatrix.false_negatives);
     }
 
     private static ConfusionMatrix calculateSentenceConfusionMatrix(HashMap<String,List<String>> groundTruth, HashMap<String,List<String>> found) {
@@ -153,7 +163,6 @@ public class NamedEntityEvaluater {
         int[] result = {trueV,falseV};
         return result;
     }
-
 
     private static void printEntities(HashMap<String,List<String>> list){
         for (Map.Entry<String,List<String>> entry: list.entrySet()) {
