@@ -1,0 +1,31 @@
+Tagged_TweetsTrainset_english.all.3class.distsim.crf.ser.gz.txt
+      type  true_positive false_positive  true_negative false_negative
+       LOC            411            109            413            193
+       ORG            245            201            247            335
+       PER           1222            230           1227            462
+micro_average_precision: 0.7766749379652605
+micro_average_recall: 0.6548117154811716
+f1_score: 0.7105561861520998
+
+Tagged_TweetsTrainset_english.conll.4class.distsim.crf.ser.gz.txt
+      type  true_positive false_positive  true_negative false_negative
+       LOC            406            182            405            196
+       ORG            222            643            225            368
+      MISC             30            274             30            189
+       PER           1217            397           1217            475
+micro_average_precision: 0.5562147730643726
+micro_average_recall: 0.6042539477924589
+f1_score: 0.5792400370713624
+
+Tagged_TweetsTrainset_english.muc.7class.distsim.crf.ser.gz.txt
+      type  true_positive false_positive  true_negative false_negative
+       LOC            376            112            376            218
+      DATE              0            154              0              0
+     MONEY              0             44              0              0
+       ORG            174            449            176            397
+   PERCENT              0             20              0              0
+      TIME              0             15              0              0
+       PER           1039            203           1045            626
+micro_average_precision: 0.61446249033256
+micro_average_recall: 0.5614840989399293
+f1_score: 0.5867799113737076

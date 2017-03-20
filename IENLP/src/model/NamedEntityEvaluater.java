@@ -15,7 +15,8 @@ import java.util.*;
 public class NamedEntityEvaluater {
 
     private NamedEntityClassifier classifier;
-    private ConfusionMatrix confusionMatrix;
+    private HashMap<String,ConfusionMatrix> confusionMatrixForTypes;
+    private ConfusionMatrix totalConfusionMatrix;
 
     private NamedEntityEvaluater(String classClassifier){
 
@@ -37,8 +38,6 @@ public class NamedEntityEvaluater {
 
                 break;
         }
-
-        this.confusionMatrix = new ConfusionMatrix();
     }
 
     public static void main(String[] args) {
@@ -51,42 +50,103 @@ public class NamedEntityEvaluater {
             evaluations.add(NEE);
 
             System.out.println(args[i]);
-            System.out.println("true_positives: " + NEE.confusionMatrix.true_positives + "; false_positives: " + NEE.confusionMatrix.false_positives + "; true_negatives: " + NEE.confusionMatrix.true_negatives + "; false_negatives: " + NEE.confusionMatrix.false_negatives);
+            printConfusionMatrixForTypeTable(NEE.confusionMatrixForTypes);
 
-            double micro_average_precision = microAveragePrecision(NEE.confusionMatrix);
-            double micro_average_recall = microAverageRecall(NEE.confusionMatrix);
+            double micro_average_precision = microAveragePrecision(NEE.totalConfusionMatrix);
+            double micro_average_recall = microAverageRecall(NEE.totalConfusionMatrix);
             double f1_score =  f1Score(micro_average_precision,micro_average_recall);
 
             System.out.println("micro_average_precision: " + micro_average_precision);
             System.out.println("micro_average_recall: " + micro_average_recall);
             System.out.println("f1_score: " + f1_score);
             System.out.println();
+
         }
 
     }
 
     private void start(String fileName){
+
         List<String> all_sentences = readFile(fileName);
+
+        totalConfusionMatrix = new ConfusionMatrix();
+        confusionMatrixForTypes = new HashMap<>();
 
         for (String sentence : all_sentences) {
 
             String [] tabSeperatedSentence= sentence.split("\\t");
 
             HashMap<String,List<String>> groundTruthEntities = groundTruth(tabSeperatedSentence[1]);
+            groundTruthEntities = cleanNotInClassefier(groundTruthEntities);
+
             HashMap<String,List<String>> foundEntities = sentenceEntities(tabSeperatedSentence[2]);
 
-            ConfusionMatrix sentenceConfusionMatrix = calculateSentenceConfusionMatrix(groundTruthEntities,foundEntities);
-            confusionMatrix.combine(sentenceConfusionMatrix); //add to total
+//                System.out.println("number: "+ tabSeperatedSentence[0] + " sentence {" + tabSeperatedSentence[2]+"}");
+//                System.out.println("ground truth:");
+//                printEntities(groundTruthEntities);
+//                System.out.println("found entities:");
+//                printEntities(foundEntities);
+//                System.out.println("results confusionMatrix:");
 
-//            System.out.println("number: "+ tabSeperatedSentence[0] + " sentence {" + tabSeperatedSentence[2]+"}");
-//            System.out.println("ground truth:");
-//            printEntities(groundTruthEntities);
-//            System.out.println("found entities:");
-//            printEntities(foundEntities);
-//            System.out.println("true_positives: " + sentenceConfusionMatrix.true_positives + "; false_positives: " + sentenceConfusionMatrix.false_positives + "; true_negatives: " + sentenceConfusionMatrix.true_negatives + "; false_negatives: " + sentenceConfusionMatrix.false_negatives);
+            HashMap<String,ConfusionMatrix> sentenceConfusionMatrixForTypes = calculateSentenceConfusionMatrixForTypes(groundTruthEntities,foundEntities);
+
+            for (Map.Entry<String,ConfusionMatrix> entry : sentenceConfusionMatrixForTypes.entrySet()) {
+                String key = entry.getKey();
+                ConfusionMatrix typeConfusionMatrix = entry.getValue();
+
+//                System.out.println("key: " + key);
+//                typeConfusionMatrix.printMatrix();
+
+
+                if(confusionMatrixForTypes.containsKey(key)){ //combine matrixes
+                    confusionMatrixForTypes.get(key).combine(typeConfusionMatrix);
+                }else{ //add new for this type
+                    confusionMatrixForTypes.put(key,typeConfusionMatrix);
+                }
+            }
+
 //            System.out.println("");
-
         }
+
+        totalConfusionMatrix = allClassConfusionMatrix(confusionMatrixForTypes);
+    }
+
+    /**
+     * remove all the ground truth entities of classefier classes that are not present in the current used classefier
+     * @param entities
+     * @return
+     */
+    private  HashMap<String,List<String>> cleanNotInClassefier(HashMap<String,List<String>>  entities){
+
+        HashMap<String,List<String>> result = new HashMap<>();
+
+        for(Map.Entry<String,List<String>> entry: entities.entrySet()){
+            String key = entry.getKey();
+
+            for (NamedEntityClassifier.NamedEntityType namedEntity: classifier.entityTypes) {
+                if(namedEntity.TAG.equals(key)){
+                    result.put(key,entry.getValue());
+                    break;
+                }
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * combine all classefiers confusionmatrixes to one total confusion matrix for an classifier
+     * @param matrixForTypes
+     * @return
+     */
+    private static ConfusionMatrix allClassConfusionMatrix(HashMap<String,ConfusionMatrix> matrixForTypes){
+        ConfusionMatrix result = new ConfusionMatrix();
+
+        for(Map.Entry<String,ConfusionMatrix> entry: matrixForTypes.entrySet()){
+            result.combine(entry.getValue());
+        }
+
+        return result;
     }
 
     private static double f1Score(double precision,double recall){
@@ -102,29 +162,91 @@ public class NamedEntityEvaluater {
         return (double)totalConfusionMatrix.true_positives / (double)(totalConfusionMatrix.true_positives + totalConfusionMatrix.false_negatives);
     }
 
-    private static ConfusionMatrix calculateSentenceConfusionMatrix(HashMap<String,List<String>> groundTruth, HashMap<String,List<String>> found) {
-        ConfusionMatrix sentenceConfusionMatrix = new ConfusionMatrix();
+    /**
+     * calculate the confusion matrix of a sentence using the found entries and the ground truth
+     * @param groundTruth
+     * @param found
+     * @return
+     */
+    private static HashMap<String,ConfusionMatrix> calculateSentenceConfusionMatrixForTypes(HashMap<String,List<String>> groundTruth, HashMap<String,List<String>> found) {
 
-        int[] positives = inList(found,groundTruth);
-        sentenceConfusionMatrix.true_positives += positives[0];
-        sentenceConfusionMatrix.false_positives += positives[1];
+        HashMap<String,ConfusionMatrix> positiveHalf = calculateHalfSentenceConfusionMatrix(true,found,groundTruth);
+        HashMap<String,ConfusionMatrix> negativeHalf = calculateHalfSentenceConfusionMatrix(false,groundTruth,found);
 
-        int[] negatives = inList(groundTruth,found);
-        sentenceConfusionMatrix.true_negatives += negatives[0]; //TODO not sure how to calculate this!
-        sentenceConfusionMatrix.false_negatives += negatives[1];
+        HashMap<String,ConfusionMatrix> confusionMatrixForTypes = combineHalfSentenceConfusionMatrixes(positiveHalf,negativeHalf);
 
-        return sentenceConfusionMatrix;
-
+        return confusionMatrixForTypes;
     }
 
-    private static int[] inList (HashMap<String,List<String>> list, HashMap<String,List<String>> entries){
+    /**
+     * combine confusionmatrixes for hashmap with classefier classes
+     * @param one
+     * @param two
+     * @return
+     */
+    private static HashMap<String,ConfusionMatrix> combineHalfSentenceConfusionMatrixes(HashMap<String,ConfusionMatrix> one, HashMap<String,ConfusionMatrix> two){
 
+        HashMap<String,ConfusionMatrix>  result = new HashMap<>();
 
-        int trueV = 0;
-        int falseV = 0;
+        for (Map.Entry<String,ConfusionMatrix> entry: one.entrySet()) { //add all one and merge all equal
+            String key = entry.getKey();
+            ConfusionMatrix tempConfusionMatrix = entry.getValue();
+
+            if(two.containsKey(key)){//merge
+                ConfusionMatrix tempConfusionMatrix2 = two.get(key);
+                tempConfusionMatrix.combine(tempConfusionMatrix2);
+
+                two.remove(key);
+            }
+
+            result.put(key,tempConfusionMatrix);
+        }
+
+        result.putAll(two); //add all two that are not equal
+
+        return result;
+    }
+
+    /**
+     * calculate the confusionmatrix for positive or negative
+     * @param positive
+     * @param list
+     * @param entries
+     * @return
+     */
+    private static HashMap<String,ConfusionMatrix>  calculateHalfSentenceConfusionMatrix(boolean positive, HashMap<String,List<String>> list, HashMap<String,List<String>> entries){
+
+        HashMap<String,ConfusionMatrix>  confusionMatrixForType = new HashMap<>();
+
+        HashMap<String,int[]>  resultsForType = inList(list,entries);
+
+        for (Map.Entry<String,int[]> entry : resultsForType.entrySet()) {
+
+            ConfusionMatrix confusionMatrix = new ConfusionMatrix();
+
+            confusionMatrix.addHalf(positive,entry.getValue()[0],entry.getValue()[1]);
+            confusionMatrixForType.put(entry.getKey(),confusionMatrix);
+        }
+
+        return confusionMatrixForType;
+    }
+
+    /**
+     * get for all classefier classes whether strings in list also occur in entries [0] is the amount that are in list and in entries [1] only in list
+     * @param list
+     * @param entries
+     * @return
+     */
+    private static HashMap<String,int[]>  inList (HashMap<String,List<String>> list, HashMap<String,List<String>> entries){
+
+        HashMap<String,int[]> trueFalseForType = new HashMap<>();
 
         for (Map.Entry<String,List<String>> listEntry: list.entrySet()) {
+
             String key = listEntry.getKey();
+
+            int[] trueFalseCount = {0,0};
+            trueFalseForType.put(key,trueFalseCount);
 
             if(entries.containsKey(key)){
 
@@ -136,34 +258,29 @@ public class NamedEntityEvaluater {
 
                     for (String entyItem: entriesStrings){
                         if(listItem.equals(entyItem)){
-                            trueV += 1;
+
+                            trueFalseForType.get(key)[0] += 1;
+
                             continue listLoop;
                         }
 
                     }
 
-                    falseV += 1;
-
+                    trueFalseForType.get(key)[1] += 1;
                 }
             }else{
-                falseV += 1;
+                trueFalseForType.get(key)[1] += 1;
             }
         }
 
-        int[] result = {trueV,falseV};
-        return result;
+        return trueFalseForType;
     }
 
-    private static void printEntities(HashMap<String,List<String>> list){
-        for (Map.Entry<String,List<String>> entry: list.entrySet()) {
-            System.out.print("type {" + entry.getKey() +"} ");
-            for (String string: entry.getValue()) {
-                System.out.print("{" + string + "}");
-            }
-            System.out.println(";");
-        }
-    }
-
+    /**
+     * Get all string belonging to all classifier classes of a sentence
+     * @param sentence
+     * @return
+     */
     private  HashMap<String,List<String>> sentenceEntities(String sentence){
 
         HashMap<String,List<String>> result = new HashMap<>();
@@ -180,8 +297,14 @@ public class NamedEntityEvaluater {
         return result;
     }
 
+    /**
+     * Get strings in a sentence labeled for classifier class(type)
+     * @param sentence
+     * @param start
+     * @param stop
+     * @return
+     */
     private static List<String> sentenceEntitiesForType(String sentence, String start, String stop){
-
         List<String> result = new ArrayList<>();
 
         while(sentence.contains(start) || sentence.contains(stop)) {
@@ -209,6 +332,11 @@ public class NamedEntityEvaluater {
         return result;
     }
 
+    /**
+     *  Get the ground truth from the string that holds those
+     * @param truthString
+     * @return
+     */
     private static HashMap<String,List<String>> groundTruth(String truthString){
         HashMap<String,List<String>> result = new HashMap<>();
 
@@ -255,6 +383,38 @@ public class NamedEntityEvaluater {
         }
 
         return results;
+    }
+
+    private static void printEntities(HashMap<String,List<String>> list){
+        for (Map.Entry<String,List<String>> entry: list.entrySet()) {
+            System.out.print("type {" + entry.getKey() +"} ");
+            for (String string: entry.getValue()) {
+                System.out.print("{" + string + "}");
+            }
+            System.out.println(";");
+        }
+    }
+
+    private static void printConfusionMatrixForTypeTable(HashMap<String,ConfusionMatrix> m){
+
+        String format = "%10s%15s%15s%15s%15s";
+
+        System.out.format(format,"type" , "true_positive", "false_positive","true_negative","false_negative");
+
+        for(Map.Entry<String,ConfusionMatrix> e: m.entrySet()){
+            ConfusionMatrix confusionMatrix = e.getValue();
+            System.out.println();
+            System.out.format(format,e.getKey(),confusionMatrix.true_positives,confusionMatrix.false_positives,confusionMatrix.true_negatives,confusionMatrix.false_negatives);
+
+        }
+        System.out.println();
+    }
+
+    private static void printConfusionMatrixForType(HashMap<String,ConfusionMatrix> m){
+        for(Map.Entry<String,ConfusionMatrix> e: m.entrySet()){
+            System.out.print("type {" + e.getKey() + "} ");
+            e.getValue().printMatrix();
+        }
     }
 
 }

@@ -16,7 +16,7 @@ public class LanguageModel {
     BufferedReader in;
     String defaultCorpus = "/Users/peterwessels/Documents/Studie/Data Science/IENLP/data/DBLPTrainset(1).txt.corpus";
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {//TODO remove classes in a (for example 7class ) classefiers that are not in the ground truth and thus also the classes in the ground truth of (for example 3class) classefier that are not in the classefier
         LanguageModel lm = new LanguageModel();
         lm.in = new BufferedReader(new InputStreamReader(System.in));
         lm.start();

@@ -16,4 +16,18 @@ public class ConfusionMatrix {
         false_negatives += confusionMatrix.false_negatives;
 
     }
+
+    public void addHalf(boolean positive,int trueV,int falseV){
+        if(positive){
+            true_positives += trueV;
+            false_positives += falseV;
+        }else{
+            true_negatives += trueV;
+            false_negatives += falseV;
+        }
+    }
+
+    public void printMatrix(){
+        System.out.println("true_positives: " + true_positives + "; false_positives: " + false_positives + "; true_negatives: " + true_negatives + "; false_negatives: " + false_negatives);
+    }
 }
