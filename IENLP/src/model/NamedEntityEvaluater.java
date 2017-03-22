@@ -385,7 +385,7 @@ public class NamedEntityEvaluater {
         return results;
     }
 
-    private static void printEntities(HashMap<String,List<String>> list){
+    public static void printEntities(HashMap<String,List<String>> list){
         for (Map.Entry<String,List<String>> entry: list.entrySet()) {
             System.out.print("type {" + entry.getKey() +"} ");
             for (String string: entry.getValue()) {
@@ -395,7 +395,7 @@ public class NamedEntityEvaluater {
         }
     }
 
-    private static void printConfusionMatrixForTypeTable(HashMap<String,ConfusionMatrix> m){
+    public static void printConfusionMatrixForTypeTable(HashMap<String,ConfusionMatrix> m){
 
         String format = "%10s%15s%15s%15s%15s";
 
@@ -410,7 +410,7 @@ public class NamedEntityEvaluater {
         System.out.println();
     }
 
-    private static void printConfusionMatrixForType(HashMap<String,ConfusionMatrix> m){
+    public static void printConfusionMatrixForType(HashMap<String,ConfusionMatrix> m){
         for(Map.Entry<String,ConfusionMatrix> e: m.entrySet()){
             System.out.print("type {" + e.getKey() + "} ");
             e.getValue().printMatrix();
