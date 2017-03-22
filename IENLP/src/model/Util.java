@@ -1,5 +1,7 @@
 package model;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -66,4 +68,25 @@ public class Util {
         System.out.println("[" + type + "] " + message);
     }
 
+    public static List<String>  fileToLineList(String fileName){
+        List<String> results = new ArrayList<>();
+
+        Scanner scanner;
+
+        try {
+
+            scanner = new Scanner(new File(fileName));
+
+            while(scanner.hasNextLine()) {
+
+                results.add(scanner.nextLine());
+
+            }
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return results;
+    }
 }

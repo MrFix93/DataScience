@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
+import static model.NamedEntityClassifiers.NamedEntityClassifier.getClassifierForTypeClass;
+
 /**
  * Created by Joep on 17-Mar-17.
  */
@@ -20,25 +22,10 @@ public class NamedEntityEvaluater {
 
     private NamedEntityEvaluater(String classClassifier){
 
-        switch (classClassifier) {
-            case NamedEntityClassifier_3class.typeClass:
-                this.classifier = new NamedEntityClassifier_3class();
+        this.classifier = getClassifierForTypeClass(classClassifier);
 
-                break;
-            case NamedEntityClassifier_4class.typeClass:
-                this.classifier = new NamedEntityClassifier_4class();
-
-                break;
-            case NamedEntityClassifier_7class.typeClass:
-                this.classifier = new NamedEntityClassifier_7class();
-
-                break;
-            default:
-                this.classifier = new NamedEntityClassifier_3class();
-
-                break;
-        }
     }
+
 
     public static void main(String[] args) {
 
@@ -67,7 +54,7 @@ public class NamedEntityEvaluater {
 
     private void start(String fileName){
 
-        List<String> all_sentences = readFile(fileName);
+        List<String> all_sentences = Util.fileToLineList(fileName);
 
         totalConfusionMatrix = new ConfusionMatrix();
         confusionMatrixForTypes = new HashMap<>();
@@ -363,27 +350,6 @@ public class NamedEntityEvaluater {
         return result;
     }
 
-    private static List<String>  readFile(String fileName){
-        List<String> results = new ArrayList<>();
-
-        Scanner scanner;
-
-        try {
-
-            scanner = new Scanner(new File(fileName));
-
-            while(scanner.hasNextLine()) {
-
-                results.add(scanner.nextLine());
-
-            }
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        return results;
-    }
 
     public static void printEntities(HashMap<String,List<String>> list){
         for (Map.Entry<String,List<String>> entry: list.entrySet()) {
@@ -394,6 +360,7 @@ public class NamedEntityEvaluater {
             System.out.println(";");
         }
     }
+
 
     public static void printConfusionMatrixForTypeTable(HashMap<String,ConfusionMatrix> m){
 
