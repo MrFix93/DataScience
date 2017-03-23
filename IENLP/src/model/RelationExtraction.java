@@ -24,13 +24,15 @@ public class RelationExtraction {
 
         String tweetsFile = args[0];
         String classifierFolder = args[1];
-        String[] classifierArgs = Arrays.copyOfRange(args, 2,args.length);
+        String affinFile = args[2];
+
+        String[] classifierArgs = Arrays.copyOfRange(args, 3,args.length);
 
         List<NamedEntityClassifier> namedEntityClassifierList = classifiersFromArgs(classifierFolder,classifierArgs);
 
         RelationExtraction relationExtraction = new RelationExtraction(namedEntityClassifierList);
 
-        relationExtraction.start(tweetsFile);
+        relationExtraction.start(tweetsFile,affinFile);
 
     }
 
@@ -39,10 +41,12 @@ public class RelationExtraction {
         classifier = classifiers.get(0); //todo not hardcode
     }
 
-    public void start(String tweetFile){
+    public void start(String tweetFile,String afinnFile){
 
 
         List<String> tweets = fileToLineList(tweetFile);
+
+        HashMap<String,Integer> afinn = fileToStringAndValue(afinnFile);
 
         for (String tweet: tweets) {
 
@@ -50,13 +54,46 @@ public class RelationExtraction {
 
             String possible = stringWithTwoOrMoreUniquePersons(classification,tweet);
 
-            if(possible != null){
-                System.out.println(possible);
+
+            if(possible == null){
+                continue;
             }
+
+            negativeAndPositiveWords(possible, afinn);
+
+            //TODO add stanford parser
+
+
+
+
 
         }
 
 
+    }
+
+    public static void negativeAndPositiveWords(String string, HashMap<String,Integer> afinn){
+        String[] words = string.split("\\s");
+
+        HashMap<String,Integer> afinnWords = new HashMap<>();
+
+        for (String word : words){
+            for(Map.Entry<String,Integer> afinnEntry : afinn.entrySet()){
+
+                String key = afinnEntry.getKey();
+                if(word.equals(key)){ //word is in list
+                    afinnWords.put(key,afinnEntry.getValue());
+                }
+
+            }
+        }
+
+        if(afinnWords.size() > 0) {
+            System.out.println(string);
+            for (Map.Entry<String, Integer> entry : afinnWords.entrySet()) {
+                System.out.println("afinn words: " + entry.getKey() + " " + entry.getValue());
+            }
+        }
     }
 
 
@@ -121,6 +158,28 @@ public class RelationExtraction {
         }
 
         return results;
+    }
+
+    public static HashMap<String,Integer>  fileToStringAndValue(String fileName){
+        HashMap<String,Integer> result = new HashMap<>();
+
+        Scanner scanner;
+
+        try {
+
+            scanner = new Scanner(new File(fileName));
+
+            while(scanner.hasNextLine()) {
+                String[] line = scanner.nextLine().split("\\t");
+                result.put(line[0],Integer.parseInt(line[1]));
+
+            }
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
 
