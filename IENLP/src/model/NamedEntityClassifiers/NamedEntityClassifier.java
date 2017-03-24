@@ -31,14 +31,18 @@ public class NamedEntityClassifier{
     private AbstractSequenceClassifier<CoreLabel> classifier;
     public List<NamedEntityType> entityTypes;
     public String language;
+    public List<List<CoreLabel>> rawClassifiedSentences;
 
     public NamedEntityClassifier(){
         entityTypes = new ArrayList<>();
+        rawClassifiedSentences = new ArrayList<List<CoreLabel>>();
     }
 
 
     NamedEntityClassifier(String classifierFolder,String classifierName){
         setClassifier(classifierFolder,classifierName);
+        entityTypes = new ArrayList<>();
+        rawClassifiedSentences = new ArrayList<List<CoreLabel>>();
 
     }
 
@@ -88,11 +92,22 @@ public class NamedEntityClassifier{
 
     }
 
+    public List<List<CoreLabel>> classifyStringAsCoreLabel(String string){
+
+        List<List<CoreLabel>> rawClassifiedSentence = classifier.classify(string);
+
+        for(List<CoreLabel> sentence : rawClassifiedSentence){ //There should only be one
+            rawClassifiedSentences.add(sentence);
+        }
+
+        return rawClassifiedSentence;
+    }
+
     public HashMap<String,List<String>> classifyString(String string){
 
         HashMap<String,List<String>> result = new HashMap<>();
 
-        List<List<CoreLabel>> out = classifier.classify(string);
+        List<List<CoreLabel>> out = classifyStringAsCoreLabel(string);
         for (List<CoreLabel> sentence : out) {
 
             String classifiedString = "";

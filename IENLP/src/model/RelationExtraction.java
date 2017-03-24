@@ -1,5 +1,8 @@
 package model;
 
+import edu.stanford.nlp.ling.CoreLabel;
+import edu.stanford.nlp.trees.Tree;
+import edu.stanford.nlp.trees.TypedDependency;
 import model.NamedEntityClassifiers.NamedEntityClassifier;
 
 import java.io.File;
@@ -15,6 +18,7 @@ public class RelationExtraction {
 
     List<NamedEntityClassifier> classifiers;
     NamedEntityClassifier classifier;
+    TextParser textParser;
 
     /**
      *
@@ -22,17 +26,19 @@ public class RelationExtraction {
      */
     public static void main(String[] args){
 
-        String tweetsFile = args[0];
-        String classifierFolder = args[1];
-        String affinFile = args[2];
+        String tweetsFile = args[1];
+        String classifierFolder = args[2];
+        String affinFile = args[3];
+        String parserFile = args[2] + args[0];
 
-        String[] classifierArgs = Arrays.copyOfRange(args, 3,args.length);
+        String[] classifierArgs = Arrays.copyOfRange(args, 4,args.length);
 
         List<NamedEntityClassifier> namedEntityClassifierList = classifiersFromArgs(classifierFolder,classifierArgs);
 
         RelationExtraction relationExtraction = new RelationExtraction(namedEntityClassifierList);
 
-        relationExtraction.start(tweetsFile,affinFile);
+
+        relationExtraction.start(tweetsFile,affinFile,parserFile);
 
     }
 
@@ -41,7 +47,9 @@ public class RelationExtraction {
         classifier = classifiers.get(0); //todo not hardcode
     }
 
-    public void start(String tweetFile,String afinnFile){
+    public void start(String tweetFile,String afinnFile,String parserFile){
+
+        textParser = new TextParser(parserFile);
 
 
         List<String> tweets = fileToLineList(tweetFile);
@@ -59,6 +67,27 @@ public class RelationExtraction {
                 continue;
             }
 
+            List<String> persons = classification.get("PERSON"); //TODO remove dublicate
+
+            //get the last added sentence in List<CoreLabel> format for the parser
+            List<CoreLabel> rawClassifiedWords = classifier.rawClassifiedSentences.get(classifier.rawClassifiedSentences.size() - 1);
+
+            Collection<TypedDependency> parsed = textParser.gramStructure(rawClassifiedWords);
+
+            for(TypedDependency p : parsed){
+                System.out.println(p.dep().originalText() + " " + p.gov().originalText() + " " + p.reln());
+            }
+
+//            String[] relation = relation(parsed,0,persons,null,null);
+//
+//            if(relation != null) {
+//                System.out.println("p1: " + relation[0] + " p2: " + relation[2]);
+//            }
+
+
+
+
+
             negativeAndPositiveWords(possible, afinn);
 
             //TODO add stanford parser
@@ -70,6 +99,32 @@ public class RelationExtraction {
         }
 
 
+    }
+//Does not work like this see https://www.google.nl/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwjpmdanq-3SAhVEOhQKHb1wBUIQjRwIBw&url=http%3A%2F%2Falfa-img.com%2Fshow%2Fsyntax-sentence-tree.html&psig=AFQjCNEHbd8MhaUgIfahoUfvHVmO7qHSbQ&ust=1490382933651654
+    public static String[] relation(Tree parsed, int index,List<String> persons,String p1, String p2){
+        index *= 10;
+        List<Tree> children = parsed.getChildrenAsList();
+        if(children.size() == 0)
+            return null;
+        for(Tree child : children){
+            index += 1;
+            String value = child.value();
+            System.out.println(value + " " + index);
+            for (String person : persons){
+                if(person.contains(value)) {
+                    if(p1 == null) {
+                        p1 = value;
+                    }else if(value != p1){
+                        String[] ar = {p1,p2};
+                        return ar;
+                    }
+                }
+            }
+            //System.out.println("node: " + child.value() + " index: " + index);
+            relation(child,index,persons, p1, p2);
+        }
+
+        return null;
     }
 
     public static void negativeAndPositiveWords(String string, HashMap<String,Integer> afinn){
@@ -138,6 +193,7 @@ public class RelationExtraction {
         return namedEntityClassifier;
     }
 
+    static final int  MAX_LINES = 200;
     public static List<String>  fileToLineList(String fileName){
         List<String> results = new ArrayList<>();
 
@@ -146,9 +202,13 @@ public class RelationExtraction {
         try {
 
             scanner = new Scanner(new File(fileName));
+            int i = MAX_LINES;
 
-            while(scanner.hasNextLine()) {
-                String line = scanner.nextLine().split("\\t")[2];
+            while(scanner.hasNextLine() && i-- > 0) {
+                String nextLine = scanner.nextLine();
+                //System.out.println(nextLine);
+                String line = nextLine.split(";")[2];
+                //System.out.println(line);
                 results.add(line);
 
             }
