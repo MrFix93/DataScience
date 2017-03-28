@@ -96,6 +96,7 @@ public class SplitFile {
             }
             System.out.println(results);
             formatTable(finalResults);
+            writeCSVResult(finalResults);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -117,6 +118,24 @@ public class SplitFile {
                     entry.getKey(), digits[0],digits[1],digits[4],digits[5],digits[3],digits[2]);
         }
 
+    }
+
+    private static void writeCSVResult(HashMap<String, HashMap<String, Double>> mapToFormat) throws FileNotFoundException, UnsupportedEncodingException {
+        PrintWriter file = new PrintWriter("results.csv", "UTF-8");
+
+        for(Map.Entry<String, HashMap<String, Double>> entry : mapToFormat.entrySet()) {
+            Double[] digits = {0d,0d,0d,0d,0d,0d,0d};
+            int count = 0;
+            for(Map.Entry<String, Double> d : entry.getValue().entrySet()) {
+                digits[count] = d.getValue();
+                count++;
+            }
+
+            file.println(String.format("%s,%.4f,%.4f,%.4f,%.4f,%.4f,%.4f",
+                    entry.getKey(), digits[0],digits[1],digits[4],digits[5],digits[3],digits[2]));
+        }
+
+        file.close();
     }
 
 }
