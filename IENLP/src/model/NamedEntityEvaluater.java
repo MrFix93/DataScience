@@ -141,12 +141,12 @@ public class NamedEntityEvaluater {
     }
 
     private static double microAveragePrecision(ConfusionMatrix totalConfusionMatrix){
-        return (double)totalConfusionMatrix.true_positives / (double)(totalConfusionMatrix.true_positives + totalConfusionMatrix.false_positives);
+        return (double)totalConfusionMatrix.true_positives / ((double)(totalConfusionMatrix.true_positives + totalConfusionMatrix.false_positives));
     }
 
     private static double microAverageRecall(ConfusionMatrix totalConfusionMatrix){
 
-        return (double)totalConfusionMatrix.true_positives / (double)(totalConfusionMatrix.true_positives + totalConfusionMatrix.false_negatives);
+        return (double)totalConfusionMatrix.true_positives / ((double)(totalConfusionMatrix.true_positives + totalConfusionMatrix.false_negatives));
     }
 
     /**

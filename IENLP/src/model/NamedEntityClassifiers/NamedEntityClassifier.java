@@ -4,6 +4,10 @@ import edu.stanford.nlp.ie.AbstractSequenceClassifier;
 import edu.stanford.nlp.ie.crf.CRFClassifier;
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.ling.CoreLabel;
+import edu.stanford.nlp.ling.HasWord;
+import edu.stanford.nlp.process.CoreLabelTokenFactory;
+import edu.stanford.nlp.process.DocumentPreprocessor;
+import edu.stanford.nlp.process.PTBTokenizer;
 import model.NamedEntityEvaluater;
 
 import java.io.IOException;
@@ -103,6 +107,8 @@ public class NamedEntityClassifier{
         return rawClassifiedSentence;
     }
 
+
+
     public HashMap<String,List<String>> classifyString(String string){
 
         HashMap<String,List<String>> result = new HashMap<>();
@@ -114,10 +120,13 @@ public class NamedEntityClassifier{
             String prefClassifierClass = null;
             for (CoreLabel word : sentence) {
 
+
+
                 String classifierClass = word.get(CoreAnnotations.AnswerAnnotation.class);
 
+
                 //Add different words that are labled after each other to one string
-                if(prefClassifierClass == null || classifierClass.equals(prefClassifierClass)){
+                if(prefClassifierClass == null || (classifierClass.equals(prefClassifierClass) && !classifierClass.equals("O"))){
                     if(!classifiedString.isEmpty()){
                         classifiedString += " ";
                     }
@@ -139,6 +148,13 @@ public class NamedEntityClassifier{
                 prefClassifierClass = classifierClass;
 //
 //              System.out.print(word.word() + '/' + word.get(CoreAnnotations.AnswerAnnotation.class) + ' ');
+            }
+
+            if(result.containsKey(prefClassifierClass)){ //if already in result
+                result.get(prefClassifierClass).add(classifiedString);
+            }else{
+                List<String> list = new ArrayList<String>(Arrays.asList(classifiedString));
+                result.put(prefClassifierClass,list);
             }
         }
 

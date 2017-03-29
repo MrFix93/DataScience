@@ -3,12 +3,13 @@ package model;
 import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.trees.TypedDependency;
+import jdk.nashorn.internal.runtime.regexp.joni.Regex;
 import model.NamedEntityClassifiers.NamedEntityClassifier;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
-
+import java.util.stream.Collectors;
 
 
 /**
@@ -19,6 +20,7 @@ public class RelationExtraction {
     List<NamedEntityClassifier> classifiers;
     NamedEntityClassifier classifier;
     TextParser textParser;
+    static final int  MAX_LINES = 20000;
 
     /**
      *
@@ -47,6 +49,12 @@ public class RelationExtraction {
         classifier = classifiers.get(0); //todo not hardcode
     }
 
+    final static String[] mustWords = {"wimbledon","#wimbledon2014", "#sport","wimbledon2014","#tennis"};
+    final static String[] notWords = {"pre-wimbledon","could","would","should","practice","practising","prepares","preperation"};
+    final static String[] drawWords = {"draw"};
+    final static String[] winWords = {"wins","claims","claim","beat","beats","defeats","achieves","scores","succes"};
+    final static String[] loseWords = {"lose","loses","behind","defeat","fails","failure"};
+
     public void start(String tweetFile,String afinnFile,String parserFile){
 
         textParser = new TextParser(parserFile);
@@ -56,39 +64,111 @@ public class RelationExtraction {
 
         HashMap<String,Integer> afinn = fileToStringAndValue(afinnFile);
 
-        for (String tweet: tweets) {
+
+         for (String tweet: tweets) {
+
+            tweet = tweet.replaceAll("[^a-zA-Z0-9 -.,//:]","");
+
+
+
+
+
 
             HashMap<String, List<String>> classification = classifier.classifyString(tweet);
 
-            String possible = stringWithTwoOrMoreUniquePersons(classification,tweet);
+
+             List<String> allTokens = new ArrayList<>();
+             for (Map.Entry<String,List<String>> entry : classification.entrySet()){
+                     allTokens.addAll(entry.getValue());
+             }
+
+             allTokens = allTokens.stream().map(String::toLowerCase).collect(Collectors.toList()); //to lower case
 
 
-            if(possible == null){
+
+
+             if(Collections.disjoint(Arrays.asList(mustWords), allTokens) || !Collections.disjoint(Arrays.asList(notWords), allTokens)){ //if tweet contains  not any of the important words
+//                 System.out.println(tweet);
+//                 System.out.println("contains no mustWords: " + Collections.disjoint(Arrays.asList(mustWords), allTokens) + " contains notWords: " + !Collections.disjoint(Arrays.asList(notWords), allTokens));
+//                 System.out.println();
+                 continue;
+             }
+
+             List<String> persons = uniquePersons(classification);
+
+            if(persons.size() < 2){
                 continue;
             }
 
-            List<String> persons = classification.get("PERSON"); //TODO remove dublicate
+
+            if(!Collections.disjoint(Arrays.asList(drawWords), allTokens) && persons.size() == 2){ //draw thus order does not matter //TODO what if more than two
+                printWinnerLoser(tweet,persons.get(0),persons.get(1),true);
+                continue;
+            }
+
+
 
             //get the last added sentence in List<CoreLabel> format for the parser
             List<CoreLabel> rawClassifiedWords = classifier.rawClassifiedSentences.get(classifier.rawClassifiedSentences.size() - 1);
 
             Collection<TypedDependency> parsed = textParser.gramStructure(rawClassifiedWords);
 
+            Collection<TypedDependency> parsedPersons = new ArrayList<TypedDependency>();
+
+             String winner = "";
+             String loser = "";
+
             for(TypedDependency p : parsed){
-                System.out.println(p.dep().originalText() + " " + p.gov().originalText() + " " + p.reln());
+
+                String v1 = p.dep().originalText();
+                String v2 = p.gov().originalText();
+
+                //System.out.println("dep: " + v1 + " gov: " + v2 + " rel: " + p.reln().toString());
+
+
+
+                for(String person: persons){
+                    if(person.contains(v1)){
+                        if(Arrays.asList(winWords).contains(v2)){ //person links to winner
+                            winner = v1;
+                        }
+                        if(Arrays.asList(loseWords).contains(v2)){ //person links to winner
+                            loser = v1;
+                        }
+
+
+                    }else if(person.contains(v2)){
+                        if(Arrays.asList(winWords).contains(v1)){ //person links to winner
+                            winner = v2;
+                        }
+                        if(Arrays.asList(loseWords).contains(v1)){ //person links to winner
+                            loser = v2;
+                        }
+                    }
+                }
             }
 
-//            String[] relation = relation(parsed,0,persons,null,null);
-//
-//            if(relation != null) {
-//                System.out.println("p1: " + relation[0] + " p2: " + relation[2]);
-//            }
+            if(loser.isEmpty() && !winner.isEmpty()){
+                for(String person : persons){
+                    if(!person.equals(winner)){
+                        loser = person;
+                        continue;
+                    }
+                }
+            }else if(!loser.isEmpty() && winner.isEmpty()){
+                for(String person : persons){
+                    if(!person.equals(loser)){
+                        winner = person;
+                        continue;
+                    }
+                }
+            }
+
+            printWinnerLoser(tweet,winner,loser,false);
 
 
 
-
-
-            negativeAndPositiveWords(possible, afinn);
+            //negativeAndPositiveWords(possible, afinn);
 
             //TODO add stanford parser
 
@@ -100,6 +180,22 @@ public class RelationExtraction {
 
 
     }
+    public static void printWinnerLoser(String tweet,String winner, String loser, boolean draw){
+
+        if(winner.isEmpty() || loser.isEmpty()){
+            //System.out.println("no winner or loser: " + tweet);
+            return;
+        }
+
+        System.out.println(tweet);
+        if(draw){
+            System.out.println("Result( draw: " + winner +" , draw: " + loser + " );");
+        }else {
+            System.out.println("Result( winner: " + winner + " , loser: " + loser + " );");
+        }
+        System.out.println();
+    }
+
 //Does not work like this see https://www.google.nl/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwjpmdanq-3SAhVEOhQKHb1wBUIQjRwIBw&url=http%3A%2F%2Falfa-img.com%2Fshow%2Fsyntax-sentence-tree.html&psig=AFQjCNEHbd8MhaUgIfahoUfvHVmO7qHSbQ&ust=1490382933651654
     public static String[] relation(Tree parsed, int index,List<String> persons,String p1, String p2){
         index *= 10;
@@ -109,7 +205,7 @@ public class RelationExtraction {
         for(Tree child : children){
             index += 1;
             String value = child.value();
-            System.out.println(value + " " + index);
+            //System.out.println(value + " " + index);
             for (String person : persons){
                 if(person.contains(value)) {
                     if(p1 == null) {
@@ -144,29 +240,25 @@ public class RelationExtraction {
         }
 
         if(afinnWords.size() > 0) {
-            System.out.println(string);
+            //System.out.println(string);
             for (Map.Entry<String, Integer> entry : afinnWords.entrySet()) {
-                System.out.println("afinn words: " + entry.getKey() + " " + entry.getValue());
+                //System.out.println("afinn words: " + entry.getKey() + " " + entry.getValue());
             }
         }
     }
 
 
-    public String stringWithTwoOrMoreUniquePersons(HashMap<String, List<String>> classification, String string){
+    public List<String> uniquePersons(HashMap<String, List<String>> classification){
 
         List<String> persons = classification.get("PERSON");
 
-        if(persons != null) {
-            Set<String> uniquePersons = new LinkedHashSet<>(persons);
-
-            if (uniquePersons.size() > 1) {
-                return string;
-
-            }
-
+        if(persons == null) {
+            return new ArrayList<String>();
         }
 
-        return null;
+        Set<String> uniquePersons = new LinkedHashSet<>(persons);
+
+        return new ArrayList<String>(uniquePersons);
     }
 
 
@@ -193,7 +285,7 @@ public class RelationExtraction {
         return namedEntityClassifier;
     }
 
-    static final int  MAX_LINES = 200;
+
     public static List<String>  fileToLineList(String fileName){
         List<String> results = new ArrayList<>();
 
