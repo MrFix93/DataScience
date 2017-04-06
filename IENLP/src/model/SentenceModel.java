@@ -2,6 +2,11 @@ package model;
 
 
 
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.ImmutableSortedSet;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.UnmodifiableIterator;
+
 import java.util.*;
 
 import static model.Util.cleanTitle;
@@ -14,13 +19,16 @@ public class SentenceModel {
     private String sentence;
     private HashMap<String, Double> NGramsProbability;
     private HashMap<Integer, HashMap<String, Double>> segments;
-    /* 3.1 sigir12twiner
+    private HashMap<Integer, Set> Si;
+    /*
+    3.1 sigir12twiner
     u = 5 is a proper bound as the maximum
     length of a segment, which largely reduces the number of possible
     segmentations.
     **/
     private static int u = 5;
-    /* 3.1 sigir12twiner
+    /*
+    3.1 sigir12twiner
     We also set e = 5 so that the segmentation only
     focuses on top-quality segments and are not stuck by trivial ones
     **/
@@ -32,63 +40,74 @@ public class SentenceModel {
     }
 
     public void createSentenceSegments() {
-        this.segments = new HashMap<>();
+        HashMap<Integer, Set> Si = new HashMap<>();
 
         for(int i = 1; i <= this.sentence.length(); i++) {
-            this.segments.put(i, createSentenceSegments(this.sentence, i));
+            Si.put(i, createSentenceSegments(this.sentence, i));
         }
     }
 
-    public HashMap<String, Double> createSentenceSegments(String sentence, Integer I){
-        //Algorithm 1: Tweet Segmentation sigir12twiner
-        HashMap<String, Double> segments = new HashMap<>();
+    public Set createSentenceSegments(String sentence, Integer i){
+        // Algorithm 1: Tweet Segmentation sigir12twiner
+        // Initialize a set i = {} to store possible segmentation of segment
+        Comparator<String> cmp = (o1, o2) -> {
+            String[] parts1 = o1.split("|");
+            double part1 = 0;
+            for(String p : parts1) {
+                part1 += segmentStickyness(p);
+            }
+
+            String[] parts2 = o1.split("|");
+            double part2 = 0;
+            for(String p : parts2) {
+                part2 += segmentStickyness(p);
+            }
+
+            double result = part1 - part2;
+            if(result == 0){
+                return 0;
+            } else if (result < 0) {
+                return -1;
+            } else {
+                return 1;
+            }
+        };
+
         String[] sentenceWords = sentence.split("\\s");
+        Set<String> segments = new TreeSet<>(cmp);
 
-        for (int i = I; i < sentenceWords.length - 1; i++){
-            String[] tempSegment = Arrays.copyOfRange(sentenceWords,0,i + 1);
+        String[] si = Arrays.copyOfRange(sentenceWords,0,i + 1);
 
-            if(i <= u) { //do not split
-                double stickyness = segmentStickyness(tempSegment);
-                segments.put(String.join(" ", tempSegment), stickyness);
-            }
+        if(i <= u) {
+            // do not split si
+            segments.add(String.join(" ", si));
 
-            for (int j = 1; j < i ;j++){
-                // try different possible ways to segment
-                if(i - j <= u){
-                    //form two shorter segments
-
-                    String[] splitTempSegment1 = Arrays.copyOfRange(tempSegment,0,j);
-                    String[] splitTempSegment2 = Arrays.copyOfRange(tempSegment,j + 1,tempSegment.length - 1);
-
-                    String splitTempSegment1String = String.join(" ",splitTempSegment1);
-                    String splitTempSegment2String = String.join(" ",splitTempSegment2);
-                    double sticknessSplitTempSegment2 = segmentStickyness(splitTempSegment2String);
-
-                    HashMap<String, Double> segmentsIterator = this.segments.get(j);
-
-                    for (Map.Entry<String, Double> entry: segmentsIterator.entrySet() ) {
-
-                        String newSegmentation = entry.getKey() +  " " + splitTempSegment2String;
-
-                        double stickyness = sticknessSplitTempSegment2 + segmentStickyness(entry.getKey());
-                        segments.put(newSegmentation, stickyness);
-                    }
-
-                }
-
-                //sort
-                Map<String, Double> sorted = Util.sortByValue(segments);
-                int index = e;
-                for (Map.Entry<String,Double> entry: sorted.entrySet()) {
-                    if(index-- < 0) {
-                        break;
-                    }
-                    segments.put(entry.getKey(),entry.getValue());
-                }
-
-            }
+            return segments;
         }
-        return segments;
+
+        for (int j = i; j < i - 1; j++){
+            if(i - j <= u){
+                //form two shorter segments
+
+                String[] splitTempSegment1 = Arrays.copyOfRange(si,1,j);
+                String[] splitTempSegment2 = Arrays.copyOfRange(si,j + 1,i);
+
+                String splitTempSegment1String = String.join(" ",splitTempSegment1);
+                String splitTempSegment2String = String.join(" ",splitTempSegment2);
+
+                Set<String> segmentsJ = Si.get(j);
+
+                for (String entry : segmentsJ) {
+                    String newSegmentation = entry +  "| " + splitTempSegment2String;
+                    segments.add(newSegmentation);
+                }
+
+            }
+
+            return ImmutableSet.copyOf(Iterables.limit(segments, e);
+        }
+
+        return null;
     }
 
     public double normalizatedStickyness(){//TODO formula (12) of sigir12twiner
