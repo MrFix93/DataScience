@@ -1,10 +1,7 @@
 package model;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 import static model.Util.cleanTitle;
 
@@ -31,6 +28,8 @@ public class LanguageModel {
         try {
             if(input.equals("1")) {
                 this.load(defaultCorpus);
+                HashMap<String, Double> result = this.sortByComparator(this.NGrams, false, 4);
+                this.printResult(result,50);
             } else {
                 this.load(input);
             }
@@ -89,6 +88,56 @@ public class LanguageModel {
         return prob;
     }
 
+    /**
+     *
+     * @param unsortMap
+     * @param order
+     * @return
+     */
+    private static HashMap<String, Double> sortByComparator(Map<String, Double> unsortMap, final boolean order, int n)
+    {
 
+        List<Map.Entry<String, Double>> list = new LinkedList<Map.Entry<String, Double>>(unsortMap.entrySet());
+
+        // Sorting the list based on values
+        Collections.sort(list, new Comparator<Map.Entry<String, Double>>()
+        {
+            public int compare(Map.Entry<String, Double> o1,
+                               Map.Entry<String, Double> o2)
+            {
+                if (order)
+                {
+                    return o1.getValue().compareTo(o2.getValue());
+                }
+                else
+                {
+                    return o2.getValue().compareTo(o1.getValue());
+
+                }
+            }
+        });
+
+        // Maintaining insertion order with the help of LinkedList
+        HashMap<String, Double> sortedMap = new LinkedHashMap<String, Double>();
+        for (Map.Entry<String, Double> entry : list)
+        {
+            int length = entry.getKey().split("\\s").length;
+            if(length == n) {
+                sortedMap.put(entry.getKey(), entry.getValue());
+            }
+        }
+        return sortedMap;
+    }
+
+    private static void printResult(Map<String, Double> mapToPrint, int limit) {
+        int count = 0;
+        for (Map.Entry<String, Double> entry:mapToPrint.entrySet()) {
+            System.out.println(entry.getKey() + "," + entry.getValue());
+            if(count >= limit) {
+                return;
+            }
+            count++;
+        }
+    }
 
 }
