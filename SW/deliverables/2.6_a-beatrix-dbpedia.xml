@@ -1,0 +1,2419 @@
+<?xml version="1.0"?>
+<sparql xmlns="http://www.w3.org/2005/sparql-results#">
+  <head>
+    <variable name="local"/>
+    <variable name="remote"/>
+    <variable name="remote_property"/>
+    <variable name="remote_value"/>
+  </head>
+  <results>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://www.w3.org/2002/07/owl#Thing</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#NaturalPerson</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://www.wikidata.org/entity/Q215627</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://www.wikidata.org/entity/Q5</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/ontology/Agent</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/ontology/Royalty</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://schema.org/Person</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://xmlns.com/foaf/0.1/Person</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/ontology/Person</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://umbel.org/umbel/rc/PersonWithOccupation</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://umbel.org/umbel/rc/RoyalFamily</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/Adult109605289</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/Alumnus109786338</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/Aristocrat109807754</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/CausalAgent100007347</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/Communicator109610660</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/Female109619168</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/HeadOfState110164747</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/Holder110180178</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/Intellectual109621545</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/Knight110238375</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/Lady110243137</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/Leader109623038</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/LivingThing100004258</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/MaleAristocrat110285135</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/MilitaryOfficer110317007</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/Negotiator110351874</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/Object100002684</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/Officeholder110371450</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/Official110372373</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/Organism100004475</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/Owner110389398</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/Person100007846</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/PhysicalEntity100001930</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/President110467179</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/Princess110474064</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/Representative110522035</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/Ruler110541229</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/Scholar110557854</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/Serviceman110582746</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/SkilledWorker110605985</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/Sovereign110628644</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/Survivor110681194</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/Unfortunate109630641</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/Whole100003553</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/Woman110787470</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/Worker109632518</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/YagoLegalActor</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/YagoLegalActorGeo</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/WikicatAttemptedAssassinationSurvivors</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/WikicatDutchMonarchs</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/WikicatDutchPeople</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/WikicatDutchPeopleOfGermanDescent</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/WikicatDutchPrincesses</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/WikicatGrandOfficersOfTheOrderOfMeritOfTheItalianRepublic</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/WikicatKnightsOfTheElephant</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/WikicatKnightsOfTheGarter</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/WikicatKnightsOfTheGoldenFleece</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/WikicatLadiesOfTheGarter</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/WikicatLeidenUniversityAlumni</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/WikicatLivingPeople</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/WikicatMonarchsWhoAbdicated</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/WikicatPresidentsOfTheCouncilOfStateOfTheNetherlands</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/WikicatProtestantMonarchs</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/class/yago/WikicatWomen</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2000/01/rdf-schema#label</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal xml:lang="en">Beatrix of the Netherlands</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2000/01/rdf-schema#label</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal xml:lang="ar">بياتريكس ملكة هولندا</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2000/01/rdf-schema#label</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal xml:lang="de">Beatrix (Niederlande)</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2000/01/rdf-schema#label</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal xml:lang="es">Beatriz de los Países Bajos</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2000/01/rdf-schema#label</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal xml:lang="fr">Beatrix (reine des Pays-Bas)</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2000/01/rdf-schema#label</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal xml:lang="it">Beatrice dei Paesi Bassi</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2000/01/rdf-schema#label</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal xml:lang="ja">ベアトリクス (オランダ女王)</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2000/01/rdf-schema#label</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal xml:lang="nl">Beatrix der Nederlanden</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2000/01/rdf-schema#label</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal xml:lang="pl">Beatrycze (królowa Holandii)</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2000/01/rdf-schema#label</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal xml:lang="pt">Beatriz dos Países Baixos</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2000/01/rdf-schema#label</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal xml:lang="ru">Беатрикс</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2000/01/rdf-schema#label</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal xml:lang="zh">贝娅特丽克丝 (荷兰)</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2000/01/rdf-schema#comment</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal xml:lang="ar">الملكة بياتريكس (31 يناير 1938 -)، الابنة الكبرى للملكة الملكة يوليانا التي تنازلت لها عن العرش هولندا من 30 أبريل 1980 حتى 30 أبريل 2013.</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2000/01/rdf-schema#comment</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal xml:lang="de">Beatrix (* 31. Januar 1938 in Baarn als Beatrix Wilhelmina Armgard), Prinzessin von Oranien-Nassau, Prinzessin zur Lippe-Biesterfeld, war vom 30. April 1980 bis zum 30. April 2013, als sie das Amt ihrem Sohn Willem-Alexander übergab, Königin der Niederlande. Seit ihrer Abdankung lautet ihr offizieller Titel Ihre Königliche Hoheit Prinzessin Beatrix der Niederlande.</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2000/01/rdf-schema#comment</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal xml:lang="es">Beatriz de los Países Bajos (Beatrix Wilhelmina Armgard van Oranje-Nassau; Baarn, 31 de enero de 1938) fue reina de los Países Bajos desde el 30 de abril de 1980 hasta su abdicación el 30 de abril de 2013, cuando le sucedió su hijo Guillermo Alejandro y retomó el título de princesa de los Países Bajos, princesa de Orange-Nassau y princesa de Lippe-Biesterfeld. Alcanzó el récord de longevidad como soberana de los Países Bajos.</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2000/01/rdf-schema#comment</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal xml:lang="ja">ベアトリクス（オランダ語: Beatrix、ベアトリクス・ウィルヘルミナ・アルムハルト・ファン・オラニエ＝ナッサウ、オランダ語: Beatrix Wilhelmina Armgard van Oranje-Nassau、1938年1月31日 - ）は、前オランダ女王（在位：1980年4月30日 - 2013年4月30日）。退位後は王女(Prinses Beatrix)。</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2000/01/rdf-schema#comment</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal xml:lang="nl">Beatrix Wilhelmina Armgard, Prinses der Nederlanden, Prinses van Oranje-Nassau, Prinses van Lippe-Biesterfeld (Baarn, 31 januari 1938) was van 30 april 1980 tot en met 30 april 2013 koningin der Nederlanden. Zij is het oudste kind van koningin Juliana der Nederlanden en prins Bernhard van Lippe-Biesterfeld en sinds 2002 weduwe van prins Claus der Nederlanden.</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2000/01/rdf-schema#comment</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal xml:lang="pl">Beatrycze, właśc. Beatrix Wilhelmina Armgard van Oranje-Nassau, z rodu Oranje-Nassau (ur. 31 stycznia 1938 w Baarn) – królowa Niderlandów od 1980 do 2013. Tron po niej przejął jej syn Wilhelm Aleksander, który jest pierwszym królem Holandii od 123 lat. Po abdykacji, była królowa, nosi ponownie tytuł Księżniczki Niderlandów.</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2000/01/rdf-schema#comment</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal xml:lang="zh">REDIRECT T:BLP_unsourced碧翠斯（Beatrix Wilhelmina Armgard ，1938年1月31日－），全名贝娅特丽克丝·威廉敏娜·阿姆加德，曾任荷蘭女王（为荷兰王国所含4国的国家元首）。</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2000/01/rdf-schema#comment</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal xml:lang="en">Beatrix (Beatrix Wilhelmina Armgard, [ˈbeːjaˌtrɪks ˌʋɪlɦɛlˈmina ˈɑrmɣɑrt]; 31 January 1938) reigned as Queen of the Netherlands from 1980 until her abdication in 2013. She is the eldest daughter of Queen Juliana and her husband, Prince Bernhard of Lippe-Biesterfeld. Upon her mother's accession in 1948, she became heir presumptive. When her mother abdicated on 30 April 1980, Beatrix succeeded her as queen.</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2000/01/rdf-schema#comment</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal xml:lang="fr">Beatrix des Pays-Bas (en néerlandais : Beatrix der Nederlanden, francisé en Béatrix, ou beaucoup plus rarement en Béatrice), née le  au palais de Soestdijk de Baarn (Pays-Bas), est reine des Pays-Bas du  au .Fille aînée de la reine Juliana et du prince Bernhard des Pays-Bas, Beatrix est née princesse des Pays-Bas, d’Orange-Nassau et de Lippe-Biesterfeld. Devenue reine par l’abdication de sa mère le 30 avril 1980, elle abdique à son tour le 30 avril 2013, après 33 ans de règne, en faveur de son fils aîné, le prince Willem-Alexander, prince d’Orange.</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2000/01/rdf-schema#comment</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal xml:lang="pt">Beatriz (Baarn, 31 de janeiro de 1938) foi rainha dos Países Baixos de 1980 até sua abdicação em 2013. É a filha mais velha da rainha Juliana e seu marido, o príncipe Bernardo de Lippe-Biesterfeld. Após a adesão de sua mãe, em 1948, tornou-se a herdeira presuntiva. Quando sua mãe abdicou em 30 de abril de 1980, Beatriz a sucedeu como rainha.</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2000/01/rdf-schema#comment</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal xml:lang="ru">Беатрикс (полное имя — Беатрикс Вильгельмина Армгард, нидерл. Beatrix Wilhelmina Armgard, МФА: [ˈbeːjaˌtrɪks] ; род. 31 января 1938) — королева Нидерландов с 30 апреля 1980, после отречения матери королевы Юлианы до 30 апреля 2013 года — собственного отречения в пользу сына — принца Виллема-Александра, из Оранской династии. После отречения носит титул принцессы Нидерландов.Правление Беатрикс — третье последовательное женское царствование в истории королевства с 1890 года.</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2000/01/rdf-schema#seeAlso</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/resource/Dutch_monarchs_family_tree</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2002/07/owl#sameAs</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://data.europa.eu/euodp/jrc-names/Beatrix_of_the_Netherlands</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2002/07/owl#sameAs</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://rdf.freebase.com/ns/m.0ktnm</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2002/07/owl#sameAs</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://www.wikidata.org/entity/Q29574</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2002/07/owl#sameAs</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://fr.dbpedia.org/resource/Beatrix_(reine_des_Pays-Bas)</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2002/07/owl#sameAs</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://de.dbpedia.org/resource/Beatrix_(Niederlande)</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2002/07/owl#sameAs</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://eu.dbpedia.org/resource/Beatriz_I.a_Herbehereetakoa</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2002/07/owl#sameAs</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://id.dbpedia.org/resource/Beatrix_dari_Belanda</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2002/07/owl#sameAs</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://it.dbpedia.org/resource/Beatrice_dei_Paesi_Bassi</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2002/07/owl#sameAs</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://ja.dbpedia.org/resource/ベアトリクス_(オランダ女王)</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2002/07/owl#sameAs</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://ko.dbpedia.org/resource/베아트릭스</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2002/07/owl#sameAs</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://nl.dbpedia.org/resource/Beatrix_der_Nederlanden</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2002/07/owl#sameAs</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://pt.dbpedia.org/resource/Beatriz_dos_Países_Baixos</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2002/07/owl#sameAs</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://wikidata.dbpedia.org/resource/Q29574</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2002/07/owl#sameAs</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://cs.dbpedia.org/resource/Beatrix_Nizozemská</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2002/07/owl#sameAs</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://el.dbpedia.org/resource/Βεατρίκη_της_Ολλανδίας</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2002/07/owl#sameAs</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://es.dbpedia.org/resource/Beatriz_de_los_Países_Bajos</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2002/07/owl#sameAs</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://pl.dbpedia.org/resource/Beatrycze_(królowa_Holandii)</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2002/07/owl#sameAs</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://viaf.org/viaf/232291430</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2002/07/owl#sameAs</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://sw.cyc.com/concept/Mx4rvViNh5wpEbGdrcN5Y29ycA</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/2002/07/owl#sameAs</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://yago-knowledge.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://www.w3.org/ns/prov#wasDerivedFrom</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://en.wikipedia.org/wiki/Beatrix_of_the_Netherlands?oldid=708240219</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/ontology/abstract</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal xml:lang="ar">الملكة بياتريكس (31 يناير 1938 -)، الابنة الكبرى للملكة الملكة يوليانا التي تنازلت لها عن العرش هولندا من 30 أبريل 1980 حتى 30 أبريل 2013.</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/ontology/abstract</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal xml:lang="de">Beatrix (* 31. Januar 1938 in Baarn als Beatrix Wilhelmina Armgard), Prinzessin von Oranien-Nassau, Prinzessin zur Lippe-Biesterfeld, war vom 30. April 1980 bis zum 30. April 2013, als sie das Amt ihrem Sohn Willem-Alexander übergab, Königin der Niederlande. Seit ihrer Abdankung lautet ihr offizieller Titel Ihre Königliche Hoheit Prinzessin Beatrix der Niederlande.</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/ontology/abstract</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal xml:lang="en">Beatrix (Beatrix Wilhelmina Armgard, [ˈbeːjaˌtrɪks ˌʋɪlɦɛlˈmina ˈɑrmɣɑrt]; 31 January 1938) reigned as Queen of the Netherlands from 1980 until her abdication in 2013. She is the eldest daughter of Queen Juliana and her husband, Prince Bernhard of Lippe-Biesterfeld. Upon her mother's accession in 1948, she became heir presumptive. When her mother abdicated on 30 April 1980, Beatrix succeeded her as queen. Beatrix attended a public primary school in Canada during World War II, and then finished her primary and secondary education in the Netherlands in the post war period. In 1961, she received her law degree from Leiden University. In 1966, Beatrix married Claus von Amsberg, a German diplomat, with whom she had three children: Willem-Alexander, King of the Netherlands (b. 1967), Prince Friso (1968-2013) and Prince Constantijn (b. 1969). Prince Claus died in 2002. At the time of her abdication, Beatrix was the oldest reigning monarch of the Netherlands. Beatrix's reign saw the country's Caribbean possessions reshaped with Aruba's secession and becoming its own constituent country within the Kingdom in 1986 as well as the subsequent Antillean Dissolution in 2010, which created the new special municipalities of Bonaire, Sint Eustatius, and Saba, and the two new constituent countries of Curaçao and Sint Maarten. On Koninginnedag (Queen's Day), 30 April 2013, Beatrix abdicated in favour of her eldest son, Willem-Alexander, and resumed the title of princess. He is the first King of the Netherlands in 123 years.</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/ontology/abstract</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal xml:lang="fr">Beatrix des Pays-Bas (en néerlandais : Beatrix der Nederlanden, francisé en Béatrix, ou beaucoup plus rarement en Béatrice), née le au palais de Soestdijk de Baarn (Pays-Bas), est reine des Pays-Bas du au . Fille aînée de la reine Juliana et du prince Bernhard des Pays-Bas, Beatrix est née princesse des Pays-Bas, d’Orange-Nassau et de Lippe-Biesterfeld. Devenue reine par l’abdication de sa mère le 30 avril 1980, elle abdique à son tour le 30 avril 2013, après 33 ans de règne, en faveur de son fils aîné, le prince Willem-Alexander, prince d’Orange.</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/ontology/abstract</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal xml:lang="es">Beatriz de los Países Bajos (Beatrix Wilhelmina Armgard van Oranje-Nassau; Baarn, 31 de enero de 1938) fue reina de los Países Bajos desde el 30 de abril de 1980 hasta su abdicación el 30 de abril de 2013, cuando le sucedió su hijo Guillermo Alejandro y retomó el título de princesa de los Países Bajos, princesa de Orange-Nassau y princesa de Lippe-Biesterfeld. Alcanzó el récord de longevidad como soberana de los Países Bajos.</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/ontology/abstract</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal xml:lang="ja">ベアトリクス（オランダ語: Beatrix、ベアトリクス・ウィルヘルミナ・アルムハルト・ファン・オラニエ＝ナッサウ、オランダ語: Beatrix Wilhelmina Armgard van Oranje-Nassau、1938年1月31日 - ）は、前オランダ女王（在位：1980年4月30日 - 2013年4月30日）。退位後は王女(Prinses Beatrix)。</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/ontology/abstract</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal xml:lang="nl">Beatrix Wilhelmina Armgard, Prinses der Nederlanden, Prinses van Oranje-Nassau, Prinses van Lippe-Biesterfeld (Baarn, 31 januari 1938) was van 30 april 1980 tot en met 30 april 2013 koningin der Nederlanden. Zij is het oudste kind van koningin Juliana der Nederlanden en prins Bernhard van Lippe-Biesterfeld en sinds 2002 weduwe van prins Claus der Nederlanden.</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/ontology/abstract</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal xml:lang="pl">Beatrycze, właśc. Beatrix Wilhelmina Armgard van Oranje-Nassau, z rodu Oranje-Nassau (ur. 31 stycznia 1938 w Baarn) – królowa Niderlandów od 1980 do 2013. Tron po niej przejął jej syn Wilhelm Aleksander, który jest pierwszym królem Holandii od 123 lat. Po abdykacji, była królowa, nosi ponownie tytuł Księżniczki Niderlandów.</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/ontology/abstract</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal xml:lang="pt">Beatriz (Baarn, 31 de janeiro de 1938) foi rainha dos Países Baixos de 1980 até sua abdicação em 2013. É a filha mais velha da rainha Juliana e seu marido, o príncipe Bernardo de Lippe-Biesterfeld. Após a adesão de sua mãe, em 1948, tornou-se a herdeira presuntiva. Quando sua mãe abdicou em 30 de abril de 1980, Beatriz a sucedeu como rainha. Frequentou uma escola primária pública no Canadá, durante a Segunda Guerra Mundial, e depois terminou sua educação primária e secundária nos Países Baixos no período pós-guerra. Em 1961, recebeu o seu diploma em Direito da Universidade de Leiden. Em 1966, casou-se com Claus von Amsberg, um diplomata alemão, com quem teve três filhos: Guilherme Alexandre, o rei dos Países Baixos (nascido em 1967), príncipe João Friso (1968 — 2013) e príncipe Constantino (nascido em 1969). Seu esposo Claus morreu em 2002. Na época de sua abdicação, a rainha Beatriz era a monarca reinante mais velha dos Países Baixos. Seu reinado viu as possessões caribenhas do país reformuladas com a secessão de Aruba e tornando-se seu próprio país constituinte dentro do Reino em 1986, assim como a posterior dissolução das Antilhas em 2010, que criou os novos municípios especiais de Bonaire, Santo Eustáquio, e Saba, e os dois novos países constitutivos de Curaçao e São Martinho. Em 28 de janeiro de 2013, Beatriz anunciou que iria abdicar em 30 de abril, Koninginnedag (Dia da Rainha), em favor de seu filho mais velho Guilherme Alexandre, o herdeiro do trono. Ele é o primeiro rei dos Países Baixos em 123 anos. Desde sua abdicação recebeu o título de Princesa Beatriz.</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/ontology/abstract</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal xml:lang="ru">Беатрикс (полное имя — Беатрикс Вильгельмина Армгард, нидерл. Beatrix Wilhelmina Armgard, МФА: [ˈbeːjaˌtrɪks] ; род. 31 января 1938) — королева Нидерландов с 30 апреля 1980, после отречения матери королевы Юлианы до 30 апреля 2013 года — собственного отречения в пользу сына — принца Виллема-Александра, из Оранской династии. После отречения носит титул принцессы Нидерландов.Правление Беатрикс — третье последовательное женское царствование в истории королевства с 1890 года. Таким образом, весь XX век в Нидерландах царствовали только женщины.</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/ontology/abstract</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal xml:lang="zh">REDIRECT T:BLP_unsourced碧翠斯（Beatrix Wilhelmina Armgard ，1938年1月31日－），全名贝娅特丽克丝·威廉敏娜·阿姆加德，曾任荷蘭女王（为荷兰王国所含4国的国家元首）。</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/ontology/activeYearsEndYear</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal datatype="http://www.w3.org/2001/XMLSchema#gYear">2013</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/ontology/activeYearsStartYear</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal datatype="http://www.w3.org/2001/XMLSchema#gYear">1980</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/ontology/parent</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/resource/Juliana_of_the_Netherlands</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/ontology/parent</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/resource/Prince_Bernhard_of_Lippe-Biesterfeld</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/ontology/predecessor</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/resource/Juliana_of_the_Netherlands</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/ontology/spouse</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/resource/Prince_Claus_of_the_Netherlands</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/ontology/successor</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/resource/Willem-Alexander_of_the_Netherlands</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://xmlns.com/foaf/0.1/name</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal xml:lang="en">Beatrix</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://xmlns.com/foaf/0.1/name</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal xml:lang="en">Beatrix Wilhemina Armgard</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://xmlns.com/foaf/0.1/homepage</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://www.koninklijkhuis.nl/globale-paginas/taalrubrieken/english/members-of-the-royal-house/her-royal-highness-princess-beatrix/</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/property/name</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal xml:lang="en">Beatrix</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://xmlns.com/foaf/0.1/depiction</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://commons.wikimedia.org/wiki/Special:FilePath/Koningin_Beatrix_in_Vries.jpg</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://xmlns.com/foaf/0.1/isPrimaryTopicOf</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://en.wikipedia.org/wiki/Beatrix_of_the_Netherlands</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/ontology/thumbnail</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://commons.wikimedia.org/wiki/Special:FilePath/Koningin_Beatrix_in_Vries.jpg?width=300</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/ontology/birthPlace</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/resource/Netherlands</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/ontology/birthPlace</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/resource/Baarn</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/ontology/birthPlace</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/resource/Soestdijk_Palace</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/property/birthPlace</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/resource/Netherlands</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/property/birthPlace</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/resource/Baarn</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/property/birthPlace</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/resource/Soestdijk_Palace</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/ontology/birthDate</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal datatype="http://www.w3.org/2001/XMLSchema#date">1938-01-31</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://purl.org/dc/terms/subject</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/resource/Category:1938_births</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://purl.org/dc/terms/subject</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/resource/Category:Dutch_people_of_German_descent</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://purl.org/dc/terms/subject</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/resource/Category:House_of_Orange-Nassau</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://purl.org/dc/terms/subject</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/resource/Category:Leiden_University_alumni</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://purl.org/dc/terms/subject</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/resource/Category:Living_people</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://purl.org/dc/terms/subject</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/resource/Category:Monarchs_who_abdicated</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://purl.org/dc/terms/subject</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/resource/Category:Protestant_Church_Christians_from_the_Netherlands</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://purl.org/dc/terms/subject</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/resource/Category:Protestant_monarchs</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://purl.org/dc/terms/subject</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/resource/Category:Members_of_the_Council_of_State_(Netherlands)</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://purl.org/dc/terms/subject</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/resource/Category:Dutch_monarchs</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://purl.org/dc/terms/subject</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/resource/Category:Queens_regnant</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://purl.org/dc/terms/subject</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/resource/Category:Heirs_presumptive_to_the_Dutch_throne</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://purl.org/dc/terms/subject</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/resource/Category:House_of_Amsberg</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://purl.org/dc/terms/subject</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/resource/Category:House_of_Lippe</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/ontology/wikiPageID</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal datatype="http://www.w3.org/2001/XMLSchema#integer">80482</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/ontology/wikiPageRevisionID</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal datatype="http://www.w3.org/2001/XMLSchema#integer">708240219</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/ontology/wikiPageExternalLink</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://www.koninklijkhuis.nl/globale-paginas/taalrubrieken/english/members-of-the-royal-house/her-royal-highness-princess-beatrix/</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/property/birthDate</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal datatype="http://www.w3.org/2001/XMLSchema#date">1938-01-31</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/property/father</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/resource/Prince_Bernhard_of_Lippe-Biesterfeld</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/property/fullName</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal xml:lang="en">Beatrix Wilhemina Armgard</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/property/mother</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/resource/Juliana_of_the_Netherlands</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/property/predecessor</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/resource/Juliana_of_the_Netherlands</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/property/reign</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal datatype="http://www.w3.org/2001/XMLSchema#gMonthDay">--04-30</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/property/spouse</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal datatype="http://www.w3.org/2001/XMLSchema#date">1966-03-10</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/property/spouse</uri>
+      </binding>
+      <binding name="remote_value">
+        <literal datatype="http://www.w3.org/2001/XMLSchema#date">2002-10-06</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/property/spouse</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/resource/Prince_Claus_of_the_Netherlands</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/property/successor</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://dbpedia.org/resource/Willem-Alexander_of_the_Netherlands</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://purl.org/voc/vrank#hasRank</uri>
+      </binding>
+      <binding name="remote_value">
+        <bnode>b0</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="local">
+        <uri>http://www.daml.org/2001/01/gedcom/royal92#@I661@</uri>
+      </binding>
+      <binding name="remote">
+        <uri>http://dbpedia.org/resource/Beatrix_of_the_Netherlands</uri>
+      </binding>
+      <binding name="remote_property">
+        <uri>http://dbpedia.org/property/wordnet_type</uri>
+      </binding>
+      <binding name="remote_value">
+        <uri>http://www.w3.org/2006/03/wn/wn20/instances/synset-sovereign-noun-1</uri>
+      </binding>
+    </result>
+  </results>
+</sparql>
