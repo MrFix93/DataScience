@@ -104,7 +104,7 @@ public class SentenceModel {
 
             }
 
-            return ImmutableSet.copyOf(Iterables.limit(segments, e);
+            return ImmutableSet.copyOf(Iterables.limit(segments, e));
         }
 
         return null;
