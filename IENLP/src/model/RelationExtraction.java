@@ -20,15 +20,24 @@ public class RelationExtraction {
     List<NamedEntityClassifier> classifiers;
     NamedEntityClassifier classifier;
     TextParser textParser;
-    static final int  MAX_LINES = 20000;
+    static final int  MAX_LINES = 3000000;
 
     /**
      *
      * @param args classifierFolder; {classifierName; typeClass; language}
+     *
+    englishPCFG.ser.gz
+    C:\Users\Joep\Documents\Wimbledon2014Tweets.txt
+    C:\Users\Joep\Documents\DataScience\IENLP\classifiers\
+    C:\Users\Joep\Documents\DataScience\IENLP\data\AFINN-111.txt
+    english.all.3class.distsim.crf.ser.gz
+    3class
+    english
      */
     public static void main(String[] args){
 
         String tweetsFile = args[1];
+        System.out.println(tweetsFile);
         String classifierFolder = args[2];
         String affinFile = args[3];
         String parserFile = args[2] + args[0];
@@ -56,41 +65,39 @@ public class RelationExtraction {
     final static String[] loseWords = {"lose","loses","behind","defeat","fails","failure"};
 
     public void start(String tweetFile,String afinnFile,String parserFile){
+        List<String> mustWordsList = Arrays.asList(mustWords);
+        List<String> notWordsList = Arrays.asList(notWords);
+        List<String> drawWordsList = Arrays.asList(drawWords);
+        List<String> winWordsList = Arrays.asList(winWords);
+        List<String> loseWordsList = Arrays.asList(loseWords);
+
+        Set<String> result = new HashSet<>();
 
         textParser = new TextParser(parserFile);
 
+        Set<String> tweets = fileToLineList(tweetFile);
+        int amountTweets = tweets.size();
 
-        List<String> tweets = fileToLineList(tweetFile);
-
-        HashMap<String,Integer> afinn = fileToStringAndValue(afinnFile);
-
-
+        int index = 0;
          for (String tweet: tweets) {
+            index++;
+            System.out.println(index + " of " + amountTweets + " tweets relation extracted");
 
             tweet = tweet.replaceAll("[^a-zA-Z0-9 -.,//:]","");
-
-
-
-
-
 
             HashMap<String, List<String>> classification = classifier.classifyString(tweet);
 
 
+             Collection<List<String>> allTokensMulti = new ArrayList<>(classification.values());
              List<String> allTokens = new ArrayList<>();
-             for (Map.Entry<String,List<String>> entry : classification.entrySet()){
-                     allTokens.addAll(entry.getValue());
+             for (List<String> string : allTokensMulti){
+                     allTokens.addAll(string);
              }
 
              allTokens = allTokens.stream().map(String::toLowerCase).collect(Collectors.toList()); //to lower case
 
 
-
-
-             if(Collections.disjoint(Arrays.asList(mustWords), allTokens) || !Collections.disjoint(Arrays.asList(notWords), allTokens)){ //if tweet contains  not any of the important words
-//                 System.out.println(tweet);
-//                 System.out.println("contains no mustWords: " + Collections.disjoint(Arrays.asList(mustWords), allTokens) + " contains notWords: " + !Collections.disjoint(Arrays.asList(notWords), allTokens));
-//                 System.out.println();
+             if(Collections.disjoint(mustWordsList, allTokens) || !Collections.disjoint(notWordsList, allTokens)){ //if tweet contains  not any of the important words
                  continue;
              }
 
@@ -101,8 +108,7 @@ public class RelationExtraction {
             }
 
 
-            if(!Collections.disjoint(Arrays.asList(drawWords), allTokens) && persons.size() == 2){ //draw thus order does not matter //TODO what if more than two
-                printWinnerLoser(tweet,persons.get(0),persons.get(1),true);
+            if(!Collections.disjoint(drawWordsList, allTokens) /*&& persons.size() == 2 **/){ //draw thus order does not matter //TODO what if more than two
                 continue;
             }
 
@@ -113,37 +119,35 @@ public class RelationExtraction {
 
             Collection<TypedDependency> parsed = textParser.gramStructure(rawClassifiedWords);
 
-            Collection<TypedDependency> parsedPersons = new ArrayList<TypedDependency>();
 
              String winner = "";
              String loser = "";
 
             for(TypedDependency p : parsed){
 
-                String v1 = p.dep().originalText();
-                String v2 = p.gov().originalText();
-
-                //System.out.println("dep: " + v1 + " gov: " + v2 + " rel: " + p.reln().toString());
-
-
+                String v1 = p.dep().originalText().toLowerCase();
+                String v2 = p.gov().originalText().toLowerCase();
 
                 for(String person: persons){
                     if(person.contains(v1)){
-                        if(Arrays.asList(winWords).contains(v2)){ //person links to winner
+                        if(winWordsList.contains(v2)){ //person links to winner
                             winner = v1;
                         }
-                        if(Arrays.asList(loseWords).contains(v2)){ //person links to winner
+                        if(loseWordsList.contains(v2)){ //person links to winner
                             loser = v1;
                         }
 
 
                     }else if(person.contains(v2)){
-                        if(Arrays.asList(winWords).contains(v1)){ //person links to winner
+                        if(winWordsList.contains(v1)){ //person links to winner
                             winner = v2;
                         }
-                        if(Arrays.asList(loseWords).contains(v1)){ //person links to winner
+                        if(loseWordsList.contains(v1)){ //person links to winner
                             loser = v2;
                         }
+                    }
+                    if(!loser.isEmpty() && !winner.isEmpty()){
+                        break;
                     }
                 }
             }
@@ -164,21 +168,22 @@ public class RelationExtraction {
                 }
             }
 
-            printWinnerLoser(tweet,winner,loser,false);
+            //printWinnerLoser(tweet,winner,loser,false);
+            result.add("Defeat( " + winner + " , " + loser + " )");
 
-
-
-            //negativeAndPositiveWords(possible, afinn);
-
-            //TODO add stanford parser
-
-
-
-
-
+            System.out.println("intermidiate results:");
+            printResult(result);
         }
+        System.out.println("finished");
+         printResult(result);
 
 
+    }
+
+    public void printResult(Set<String> result){
+        for(String string : result){
+            System.out.println(string);
+        }
     }
     public static void printWinnerLoser(String tweet,String winner, String loser, boolean draw){
 
@@ -247,18 +252,57 @@ public class RelationExtraction {
         }
     }
 
+    public static void printList(List<String> list){
+        for(String string : list){
+            System.out.println(string);
+        }
+    }
+
 
     public List<String> uniquePersons(HashMap<String, List<String>> classification){
 
         List<String> persons = classification.get("PERSON");
 
         if(persons == null) {
-            return new ArrayList<String>();
+            return new ArrayList<>();
         }
 
-        Set<String> uniquePersons = new LinkedHashSet<>(persons);
+        List<String> uniquePersonsTemp = new ArrayList<>(new LinkedHashSet<>(persons));
+//        System.out.println("temp list");
+//        printList(persons);
 
-        return new ArrayList<String>(uniquePersons);
+
+        List<String> uniquePersons = new ArrayList<>();
+
+        uniquePersons :for(String personTemp : uniquePersonsTemp){
+            if(personTemp.length() < 2){ //if is not a name
+                continue ;
+            }
+            personTemp = personTemp.toLowerCase();
+
+
+            for (String person : uniquePersons){
+                person = person.toLowerCase();
+
+                if(person.contains(personTemp) || personTemp.contains(person)){
+                    System.out.println("is in list" + person + " by " + personTemp);
+
+                    if(person.length() < personTemp.length()){ //replace if the name is longer
+                        System.out.println("replace" + person + " by " + personTemp);
+                        uniquePersons.remove(person);
+                        uniquePersons.add(personTemp);
+                        //uniquePersons.set(uniquePersons.indexOf(person),personTemp);
+                    }
+
+                    continue uniquePersons;
+                }
+            }
+            uniquePersons.add(personTemp);
+        }
+//        System.out.println("final list");
+//        printList(uniquePersons);
+
+        return uniquePersons;
     }
 
 
@@ -286,22 +330,25 @@ public class RelationExtraction {
     }
 
 
-    public static List<String>  fileToLineList(String fileName){
-        List<String> results = new ArrayList<>();
+    public static Set<String>  fileToLineList(String fileName){
+        Set<String> results = new HashSet<>();
 
-        Scanner scanner;
+        Scanner scanner = null;
 
         try {
 
             scanner = new Scanner(new File(fileName));
-            int i = MAX_LINES;
+            int i = 0;
 
-            while(scanner.hasNextLine() && i-- > 0) {
+            while(scanner.hasNextLine() && i++ < MAX_LINES) {
+                System.out.println(i + " of " + MAX_LINES + " lines read of file");
                 String nextLine = scanner.nextLine();
                 //System.out.println(nextLine);
-                String line = nextLine.split(";")[2];
-                //System.out.println(line);
-                results.add(line);
+                String[] line = nextLine.split(";");
+                if(line.length > 1) {
+                    //System.out.println(line);
+                    results.add(line[2]);
+                }
 
             }
         } catch (FileNotFoundException e) {
@@ -309,6 +356,7 @@ public class RelationExtraction {
             e.printStackTrace();
         }
 
+        scanner.close();
         return results;
     }
 

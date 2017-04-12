@@ -39,7 +39,7 @@ public class NamedEntityClassifier{
 
     public NamedEntityClassifier(){
         entityTypes = new ArrayList<>();
-        rawClassifiedSentences = new ArrayList<List<CoreLabel>>();
+        rawClassifiedSentences = new ArrayList<>();
     }
 
 
@@ -110,6 +110,7 @@ public class NamedEntityClassifier{
 
 
     public HashMap<String,List<String>> classifyString(String string){
+        rawClassifiedSentences.clear(); //start new sentence empty //for memory saving
 
         HashMap<String,List<String>> result = new HashMap<>();
 

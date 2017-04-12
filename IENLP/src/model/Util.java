@@ -71,7 +71,7 @@ public class Util {
     public static List<String>  fileToLineList(String fileName){
         List<String> results = new ArrayList<>();
 
-        Scanner scanner;
+        Scanner scanner = null;
 
         try {
 
@@ -86,7 +86,7 @@ public class Util {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
+        scanner.close();
         return results;
     }
 }

@@ -9,8 +9,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="lucene-core-3.6.2" level="project" />
-    <orderEntry type="library" name="lucene-analyzers-3.6.2" level="project" />
     <orderEntry type="library" name="stanford-ner-3.7.0" level="project" />
   </component>
 </module>
